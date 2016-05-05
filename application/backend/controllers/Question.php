@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Question extends CI_Controller {
 
+	public function __construct(){
+		parent:: __construct();
+		$this->uid = $this->session->userdata('uid');
+	}
+
 	public function index(){
 		$data = array();
 		$sub_data = array();
@@ -22,14 +27,14 @@ class Question extends CI_Controller {
 	public function add(){
 		$data = array();
 
-		$data['name'] = "";
+		$data['question'] = "";
 		$data['category_id'] = "";
-		$data['menu_id'] = "";
+		$data['subject_id'] = "";
 		$data['option'] = "";
 		$data['submit'] = "Save New Question";
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name','Question Name','trim|required');
+		$this->form_validation->set_rules('question','Question Name','trim|required');
 		
 
 		
@@ -45,9 +50,9 @@ class Question extends CI_Controller {
         }else{
         	$datas = array();
 
-        $datas['question'] = $this->input->post('name');
+        $datas['question'] = $this->input->post('question');
         $datas['category_id'] = $this->input->post('category_id');
-        $datas['menu_id'] = $this->input->post('menu_id');
+        $datas['subject_id'] = $this->input->post('subject_id');
 
         $option=$this->input->post('option');
 
@@ -79,15 +84,20 @@ class Question extends CI_Controller {
 	public function edit($id){
 		$data = array();
 
-		// $content = $this->question_model->question_info();
-		$data['name'] = "";
-		$data['category_id'] = "";
-		$data['menu_id'] = "";
-		$data['option'] = "";
-		$data['submit'] = "Save New Question";
+		$content = $this->common_model->getInfo('tbl_question', array('id' => $id));
+		$this->load->model('question_model');
+		$correct_ans = $this->question_model->get_correct_ans($id);
+
+
+		$sub_data['question'] = $content->question;
+		$sub_data['category_id'] = $content->category_id;
+		$sub_data['subject_id'] = $content->subject_id;
+		$sub_data['correct_ans'] = $correct_ans->ans;
+		$sub_data['option'] = "";
+		$sub_data['submit'] = "Save New Question";
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name','Question Name','trim|required');
+		$this->form_validation->set_rules('question','Question Name','trim|required');
 		
 
 		
@@ -95,7 +105,10 @@ class Question extends CI_Controller {
 			$data['header'] = $this->load->view('common/header', '', TRUE);
 			$data['sidebar'] = $this->load->view('common/sidebar', '', TRUE);
 
-			$data['main_content'] = $this->load->view('question/add_form', $data, TRUE);
+			$sub_data['category_list'] = $this->common_model->selectAll('tbl_category');
+			$sub_data['subject_list'] = $this->common_model->selectAll('tbl_subject');
+
+			$data['main_content'] = $this->load->view('question/add_form', $sub_data, TRUE);
 
 			$data['footer'] = $this->load->view('common/footer', '', TRUE);
 
@@ -103,23 +116,28 @@ class Question extends CI_Controller {
         }else{
         	$datas = array();
 
-        $datas['question'] = $this->input->post('name');
+        $datas['question'] = $this->input->post('question');
+        $datas['creator_id'] = $this->uid;
         $datas['category_id'] = $this->input->post('category_id');
-        $datas['menu_id'] = $this->input->post('menu_id');
+        $datas['subject_id'] = $this->input->post('subject_id');
 
         $option=$this->input->post('option');
 
-        $this->db->insert('tbl_question', $datas);
-        $insert_id=$this->db->insert_id();
+        $this->common_model->update('tbl_question', $datas, array('id' => $id));
+
+        
+        $insert_id = $id;       
 
         $ans = $this->input->post('answer');
-
+        
+        $this->common_model->delete('tbl_option', array('question_id' => $insert_id));
+        
         foreach ($option as $key => $value) {
 
-        	if ($key!=$ans) {
+        	if ($key!=$ans-1) {
         		$this->db->insert('tbl_option', array('question_id' => $insert_id, 'option_name' => $value));
         	}else{
-        		$this->db->insert('tbl_option', array('question_id' => $insert_id, 'option_name' => $value, 'ans' => 1));
+        		$this->db->insert('tbl_option', array('question_id' => $insert_id, 'option_name' => $value, 'ans' => $ans));
         	}
         	
         	

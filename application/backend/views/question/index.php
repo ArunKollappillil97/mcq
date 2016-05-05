@@ -55,7 +55,7 @@
                       <td><?php echo $value->id; ?></td>
                       <td><?php echo $value->question; ?></td>
                       <td><?php echo $value->category_id; ?></td>
-                      <td><?php echo $value->menu_id; ?></td>
+                      <td><?php echo $value->subject_id; ?></td>
                       
                       <td class="text-right">
                           <div class="btn-group">

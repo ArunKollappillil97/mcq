@@ -45,13 +45,13 @@
 
 	<!-- This one in here is responsive menu for tablet and mobiles -->
 	<div class="responsive-navigation visible-sm visible-xs">
-	    <a href="index.html#" class="menu-toggle-btn">
+	    <a href="" class="menu-toggle-btn">
 		<i class="fa fa-bars"></i>
 	    </a>
 	    <div class="responsive_menu">
 		<ul class="main_menu">
-		    <li><a href="index.html">Home</a></li>
-		    <li><a href="index.html#">Events</a>
+		    <li><a href="">Home</a></li>
+		    <li><a href="">Events</a>
 			<ul>
 			    <li><a href="events-grid.html">Events Grid</a></li>
 			    <li><a href="events-list.html">Events List</a></li>
@@ -81,11 +81,11 @@
 		    <li><a href="contact.html">Contact</a></li>
 		</ul> <!-- /.main_menu -->
 		<ul class="social_icons">
-		    <li><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
-		    <li><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
-		    <li><a href="index.html#"><i class="fa fa-pinterest"></i></a></li>
-		    <li><a href="index.html#"><i class="fa fa-google-plus"></i></a></li>
-		    <li><a href="index.html#"><i class="fa fa-rss"></i></a></li>
+		    <li><a href=""><i class="fa fa-facebook"></i></a></li>
+		    <li><a href=""><i class="fa fa-twitter"></i></a></li>
+		    <li><a href=""><i class="fa fa-pinterest"></i></a></li>
+		    <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+		    <li><a href=""><i class="fa fa-rss"></i></a></li>
 		</ul> <!-- /.social_icons -->
 	    </div> <!-- /.responsive_menu -->
 	</div> <!-- /responsive_navigation -->
@@ -127,7 +127,7 @@
 
 				    foreach ($category_list as $value) {
 					$category_id = $value->id;
-					$subject_name = $this->common_model->selectAllWhere('tbl_menu', array('category_id' => $category_id));
+					$subject_name = $this->common_model->selectAllWhere('tbl_subject', array('category_id' => $category_id));
 					?>
 
     				    <li><a href="<?php echo base_url(); ?>category/sub_category"><?php echo $value->name; ?></a>

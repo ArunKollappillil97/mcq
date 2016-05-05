@@ -43,10 +43,10 @@
 	                      <label>Question Name</label>
 	                      <?php 		                      
 						    $form_input = array(
-						        'name' => 'name',
+						        'name' => 'question',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $name, 
+						        'value' => $question, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );
@@ -57,10 +57,12 @@
 
 					<div class="col-md-4">
 						<div class="form-group">
-						<label for="">Select Question Category</label>
+						<label for="">Select Question's Category</label>
 							<select name="category_id" id="category_id" class="form-control">
-								<option value="">Select Question</option>
-								<option value="1">Select Question</option>
+								<option value="">Select Category</option>
+								<?php foreach ($category_list as $value) { ?>
+									<option <?php if($value->id==$category_id) echo "selected"; ?> value="<?php echo $value->id ?>"><?php echo $value->name; ?></option>
+								<?php } ?>
 
 							</select>
 						</div>
@@ -68,10 +70,12 @@
 
 					<div class="col-md-4">
 						<div class="form-group">
-						<label for="">Select Question Menu</label>
-							<select name="menu_id" id="menu_id" class="form-control">
-								<option value="">Select Question</option>
-								<option value="1">Select Question</option>
+						<label for="">Select Question's Subject</label>
+							<select name="subject_id" id="subject_id" class="form-control">
+								<option value="">Select Subject</option>
+								<?php foreach ($subject_list as $value) { ?>
+									<option <?php if($value->id==$subject_id) echo "selected"; ?> value="<?php echo $value->id ?>"><?php echo $value->name; ?></option>
+								<?php } ?>
 
 							</select>
 						</div>
@@ -82,10 +86,10 @@
 						<label for="">Select Correct Answer</label>
 							<select name="answer" id="answer" class="form-control">
 								<option value="">Select Option</option>
-								<option value="0">Option One</option>
-								<option value="1">Option Two</option>
-								<option value="2">Option Three</option>
-								<option value="3">Option Four</option>
+								<option <?php if ($correct_ans==1) echo "selected"; ?> value="1">Option One</option>
+								<option <?php if ($correct_ans==2) echo "selected"; ?> value="2">Option Two</option>
+								<option <?php if ($correct_ans==3) echo "selected"; ?> value="3">Option Three</option>
+								<option <?php if ($correct_ans==4) echo "selected"; ?> value="4">Option Four</option>
 
 							</select>
 						</div>
@@ -100,7 +104,7 @@
 						        'name' => 'option[]',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $name, 
+						        'value' => $question, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );
@@ -117,7 +121,7 @@
 						        'name' => 'option[]',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $name, 
+						        'value' => $question, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );
@@ -134,7 +138,7 @@
 						        'name' => 'option[]',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $name, 
+						        'value' => $question, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );
@@ -151,7 +155,7 @@
 						        'name' => 'option[]',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $name, 
+						        'value' => $question, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );

@@ -47,16 +47,16 @@ class Auth extends CI_Controller {
             
             if (!empty($checkdata)) {
                 $userinfo = array(
-                    'firstname' => $checkdata->first_name,
-                    'lastname' => $checkdata->last_name,
-                    'user_email' => $checkdata->email,
-                    'user_phone' => $checkdata->phone,
-                    'username' => $checkdata->username,
-                    'uid' => $checkdata->user_id,
-                    'user_type' => $checkdata->user_type,
-                    'profile_picture' => $checkdata->profile_picture,
+                    'firstname'         => $checkdata->first_name,
+                    'lastname'          => $checkdata->last_name,
+                    'user_email'        => $checkdata->email,
+                    'user_phone'        => $checkdata->phone,
+                    'username'          => $checkdata->username,
+                    'uid'               => $checkdata->id,
+                    'user_type'         => $checkdata->user_type,
+                    'profile_picture'   => $checkdata->profile_picture,
                                         
-                    'user_logged' => TRUE
+                    'user_logged'       => TRUE
                 );
 
                 $this->session->set_userdata($userinfo);

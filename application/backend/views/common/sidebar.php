@@ -8,7 +8,7 @@
             </div>
             <div class="pull-left info">
               <p>Alexander Pierce</p>
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <a href="<?php echo base_url(); ?>"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
           <!-- search form -->
@@ -26,8 +26,8 @@
             <li class="header">MAIN NAVIGATION</li>
 
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>menu/index">
-                <i class="fa fa-dashboard"></i> <span>Menu Information</span> 
+              <a href="<?php echo base_url(); ?>subject/index">
+                <i class="fa fa-dashboard"></i> <span>Subject Information</span> 
                 <!-- <i class="fa fa-angle-left pull-right"></i> -->
               </a>
               
@@ -74,14 +74,14 @@
                 <span class="label label-primary pull-right">4</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                <li><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                <li><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                <li><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                <li><a href="<?php echo base_url(); ?>"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
               </ul>
             </li>
             <li>
-              <a href="../widgets.html">
+              <a href="<?php echo base_url(); ?>">
                 <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
               </a>
             </li>

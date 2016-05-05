@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box-header">
-				<a href="<?php echo base_url(); ?>menu" class="btn btn-primary pull-right">View Menu</a>
+				<a href="<?php echo base_url(); ?>subject" class="btn btn-primary pull-right">View Subject</a>
 			</div>
 		</div>
 	</div>
@@ -36,11 +36,11 @@
 				<?php echo form_open_multipart("");?>
 				
 					<div class="box-header with-border">
-	                  <h3 class="box-title">Add New Menu Form</h3>
+	                  <h3 class="box-title">Add New Subject Form</h3>
 	                </div><!-- /.box-header -->
 					<div class="col-md-4">
 						<div class="form-group">
-	                      <label>Menu Name</label>
+	                      <label>Subject Name</label>
 	                      <?php 		                      
 						    $form_input = array(
 						        'name' => 'name',
@@ -48,7 +48,7 @@
 						        'class' =>'form-control ', 
 						        'value' => $name, 
 						        'required' => 'required',
-						        'placeholder'=>'Menu Name'
+						        'placeholder'=>'Subject Name'
 						    );
 						    echo form_input($form_input); 
 						    ?>
@@ -57,7 +57,7 @@
 
 					<div class="col-md-4">
 						<div class="form-group">
-						<label for="">Select Menu Category</label>
+						<label for="">Select Subject Category</label>
 							<select name="category_id" id="category_id" class="form-control">
 								<option value="">Select Category</option>
 
@@ -80,7 +80,7 @@
 						        'class' =>'form-control ', 
 						        'value' => $serial, 
 						        'required' => 'required',
-						        'placeholder'=>'Menu Serial'
+						        'placeholder'=>'Subject Serial'
 						    );
 						    echo form_input($form_input); 
 						    ?>

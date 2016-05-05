@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="box-header">
-					<a href="<?php echo base_url(); ?>menu/add" class="btn btn-success pull-right">Add New Menu</a>
+					<a href="<?php echo base_url(); ?>subject/add" class="btn btn-success pull-right">Add New Subject</a>
 				</div>
 			</div>
 		</div>
@@ -43,14 +43,14 @@
                   <table class="table table-striped">
                     <tr>
                       <th>ID</th>
-                      <th>Menu Name</th>
-                      <th>Menu Category</th>
+                      <th>Subject Name</th>
+                      <th>Subject Category</th>
                       <th>Serial</th>
                       <th class="text-right">Action</th>
                     </tr>
                     <?php
                                         
-                    foreach ($menu_list as $value) { ?>
+                    foreach ($subject_list as $value) { ?>
                     <tr>                    
                       <td><?php echo $value->id; ?></td>
                       <td><?php echo $value->name; ?></td>
@@ -64,8 +64,8 @@
                             </button>
                             <ul class="dropdown-menu" style="right: 0; left: auto;">
 
-                           <li><a href="<?php echo base_url(); ?>menu/edit/<?php echo $value->id; ?>" >Edit</a></li>
-                           <li><a href="<?php echo base_url(); ?>menu/delete/<?php echo $value->id; ?>"  onclick="return confirm('Do you want to allow him to');">Delete</a></li>
+                           <li><a href="<?php echo base_url(); ?>subject/edit/<?php echo $value->id; ?>" >Edit</a></li>
+                           <li><a href="<?php echo base_url(); ?>subject/delete/<?php echo $value->id; ?>"  onclick="return confirm('Do you want to allow him to');">Delete</a></li>
                                                              
                           
                         
