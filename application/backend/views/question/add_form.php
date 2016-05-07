@@ -104,7 +104,7 @@
 						        'name' => 'option[]',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $question, 
+						        'value' => $option_one, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );
@@ -121,7 +121,7 @@
 						        'name' => 'option[]',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $question, 
+						        'value' => $option_two, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );
@@ -138,7 +138,7 @@
 						        'name' => 'option[]',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $question, 
+						        'value' => $option_three, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );
@@ -155,7 +155,7 @@
 						        'name' => 'option[]',
 						        'type' => 'text',
 						        'class' =>'form-control ', 
-						        'value' => $question, 
+						        'value' => $option_four, 
 						        'required' => 'required',
 						        'placeholder'=>'Question Name'
 						    );

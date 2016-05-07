@@ -26,12 +26,22 @@ class Question extends CI_Controller {
 
 	public function add(){
 		$data = array();
+		$sub_data = array();
 
-		$data['question'] = "";
-		$data['category_id'] = "";
-		$data['subject_id'] = "";
-		$data['option'] = "";
-		$data['submit'] = "Save New Question";
+		$sub_data['question'] 		= "";
+		$sub_data['category_id'] 	= "";
+		$sub_data['subject_id'] 	= "";
+
+		$sub_data['option_one'] 	= "";
+		$sub_data['option_two'] 	= "";
+		$sub_data['option_three'] 	= "";
+		$sub_data['option_four'] 	= "";
+		$sub_data['correct_ans'] 	= "";
+
+		$sub_data['category_list'] = $this->common_model->selectAll('tbl_category');
+		$sub_data['subject_list'] = $this->common_model->selectAll('tbl_subject');
+
+		$sub_data['submit'] = "Save New Question";
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('question','Question Name','trim|required');
@@ -42,7 +52,7 @@ class Question extends CI_Controller {
 			$data['header'] = $this->load->view('common/header', '', TRUE);
 			$data['sidebar'] = $this->load->view('common/sidebar', '', TRUE);
 
-			$data['main_content'] = $this->load->view('question/add_form', $data, TRUE);
+			$data['main_content'] = $this->load->view('question/add_form', $sub_data, TRUE);
 
 			$data['footer'] = $this->load->view('common/footer', '', TRUE);
 
@@ -85,16 +95,34 @@ class Question extends CI_Controller {
 		$data = array();
 
 		$content = $this->common_model->getInfo('tbl_question', array('id' => $id));
+		$option = $this->common_model->selectAllWhere('tbl_option', array('question_id' => $content->id));
+		
 		$this->load->model('question_model');
 		$correct_ans = $this->question_model->get_correct_ans($id);
 
+		$sub_data['question'] 		= $content->question;
+		$sub_data['category_id'] 	= $content->category_id;
+		$sub_data['subject_id'] 	= $content->subject_id;
 
-		$sub_data['question'] = $content->question;
-		$sub_data['category_id'] = $content->category_id;
-		$sub_data['subject_id'] = $content->subject_id;
-		$sub_data['correct_ans'] = $correct_ans->ans;
-		$sub_data['option'] = "";
-		$sub_data['submit'] = "Save New Question";
+		if ($correct_ans!="" OR $correct_ans !=NULL) {
+			$sub_data['correct_ans'] 	= $correct_ans->ans;
+		}else{
+			$sub_data['correct_ans'] 	= "";
+		}
+		
+		if ($option!=NULL) {
+			$sub_data['option_one'] 	= $option[0]->option_name;
+			$sub_data['option_two'] 	= $option[1]->option_name;
+			$sub_data['option_three'] 	= $option[2]->option_name;
+			$sub_data['option_four'] 	= $option[3]->option_name;
+		}else{
+			$sub_data['option_one'] 	= "";
+			$sub_data['option_two'] 	= "";
+			$sub_data['option_three'] 	= "";
+			$sub_data['option_four'] 	= "";
+		}
+		
+		$sub_data['submit'] 		= "Save New Question";
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('question','Question Name','trim|required');
