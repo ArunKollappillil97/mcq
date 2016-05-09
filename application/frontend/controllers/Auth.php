@@ -16,19 +16,20 @@ class Auth extends CI_Controller {
 
 	public function login(){
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('email', 'password', 'required');
+		$this->form_validation->set_rules('email', 'key', 'required');
 
 		if ($this->form_validation->run()==FALSE) {
 			$this->load->view('login');
 		}else{
 			$email_address = $this->input->post('email');
-			$password = $this->input->post('password');
+			$password = $this->input->post('key');
 
-			$check_login = $this->auth_model->check_login($email_address, md5($password));
+			$check_login = $this->auth_model->check_login($email_address, $password);
+			
 			echo "<pre>";
-			print_r(md5($password));
 			print_r($check_login);
 			exit();
+			
 			
 			if($check_login==TRUE){
 				$login_data = array(
