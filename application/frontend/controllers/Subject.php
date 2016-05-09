@@ -6,6 +6,7 @@ class Subject extends CI_Controller {
 	public function __construct(){
 		parent:: __construct();
 		$this->load->helper('form');
+        $this->load->library('form_validation');
 	}
     
 
@@ -14,6 +15,7 @@ class Subject extends CI_Controller {
     }
 
     public function view_details(){
+
     	$this->load->view('subject/view_details');
     }
 

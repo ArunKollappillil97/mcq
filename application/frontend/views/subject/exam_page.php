@@ -42,6 +42,8 @@
                             
                             <hr>
                             <a href="<?php echo base_url(); ?>exam/exam_page" class="btn btn-primary">Next Question</a>
+                            <a href="<?php echo base_url(); ?>exam/exam_page" class="btn btn-primary">Skipp Question</a>
+                            <a href="<?php echo base_url(); ?>exam/exam_page" class="btn btn-primary">End Exam</a>
 
                         </div>
                     </div>

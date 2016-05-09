@@ -34,8 +34,36 @@
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas error, a porro nemo autem, fuga! Sint possimus incidunt commodi dicta facilis alias voluptas assumenda, nemo, necessitatibus dignissimos, recusandae quas minima.</p>
                             
                             <hr>
+
+                            <?php echo form_open('exam/create_exam/'); ?>
                             
-                            <a href="<?php echo base_url(); ?>exam/exam_page" class="btn btn-primary">Start Exam</a>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <?php 
+                                    $form_option = array(
+                                        '10' => '10',
+                                        '20' => '20',
+                                        '30' => '30',
+                                        '40' => '40',
+                                        '50' => '50'
+                                    );
+                                    echo form_label('Select Number of Question');
+                                    echo form_dropdown('question_select', $form_option, '', array('class' => 'form-control'));
+                                    ?>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <br>
+                                <?php 
+                                echo form_submit('start_exam', 'Start Exam', array('class' => 'btn btn-primary'));
+                                echo form_close(); 
+                                ?>
+                            </div>
+
+                            
+                            
+                            <!-- <a href="<?php echo base_url(); ?>exam/exam_page" class="btn btn-primary">Start Exam</a> -->
 
                         </div>
                     </div>

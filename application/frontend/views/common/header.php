@@ -32,8 +32,8 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/custom.css">
 	<!-- JavaScripts -->
-	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery-1.10.2.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery-migrate-1.2.1.min.js"></script>
 	<script src="<?php echo base_url(); ?>js/modernizr.js"></script>
 	<!--[if lt IE 8]>
 	    <div style=' clear: both; text-align:center; position: relative;'>
@@ -106,8 +106,8 @@
 		    <div class="col-md-offset-4 col-md-4">
 			<ul class="nav navbar-nav navbar-right">
 
-			    <li><a href="#" style="margin-top:20px;"><span class="glyphicon glyphicon-lock"></span>Login</a></li>
-			    <li><a href="#" style="margin-top:20px;"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+			    <li><a href="<?php echo base_url(); ?>login" style="margin-top:20px;"><span class="glyphicon glyphicon-lock"></span>Login</a></li>
+			    <li><a href="<?php echo base_url(); ?>register" style="margin-top:20px;"><span class="glyphicon glyphicon-user"></span>Register</a></li>
 			</ul>
 
 		    </div>
@@ -205,3 +205,40 @@
 	    </div> <!-- /.nav-bar-main --><br>
 
 	</header> 
+
+	<!-- ***************************************************************** -->
+
+
+<!-- Being Page Title -->
+<!-- BreadCamp -->
+<div class="container">
+    
+
+
+
+<?php
+       $success = $this->session->flashdata('success') ; 
+       $error = $this->session->flashdata('error') ;
+       if($success){
+       ?>
+         
+         
+<div class="alert alert-success alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <?php echo $success ;?>
+</div>
+       <?php } 
+       if($error){
+       ?>
+          
+         <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <?php echo $error ;?>
+        </div>
+       <?php } 
+       
+       // if(validation_errors()){
+       // 	echo validation_errors();
+       // }
+       ?>
+</div>
