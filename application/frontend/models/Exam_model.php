@@ -2,7 +2,19 @@
 class Exam_model extends CI_Model{
     
     public function check_exist_exam($user_id){
-        return 0;
+        $this->db->where('user_id', $user_id);
+        $this->db->from('tbl_exam');
+        $query_result= $this->db->get();
+
+        $num_rows = $query_result->num_rows();
+
+        if ($num_rows > 0) {
+            return TRUE;
+        }else {
+            return FALSE;
+        }
+        
+
     }
 
     public function select_question_set_by_subject($category_id, $subject_id){
@@ -24,7 +36,8 @@ class Exam_model extends CI_Model{
         $this->db->insert('tbl_exam', array('
             user_id' => $this->uid, 
             'exam_status' => 1, 
-            'exam_start_time' => date("h:i:sa")
+            'exam_start_time' => date("h:i:sa"),
+            'exam_end_time' => date("h:i:sa")
             ));
     }
     

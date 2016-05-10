@@ -26,5 +26,26 @@ class Auth_model extends CI_Model{
         }
     }
 
+    public function check_exist($table_name, $check_field){
+        if(!empty ($email) && !empty($password)){
+        $this->db->where($check_field);
+
+        $this->db->from($table_name);
+
+        $query = $this->db->get();
+            
+            if($query->num_rows() > 0){
+
+                 
+               return  $query->row();
+
+            }else{
+                return NULL;
+            }
+            
+        }
+
+    }
+
     
 }

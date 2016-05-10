@@ -55,8 +55,17 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] 		= "auth/login";
 $route['auth/login'] 	= "auth/login";
+
 $route['register'] 		= "auth/register";
 $route['auth/register'] = "auth/register";
+
+$route['home'] 			= "home/index";
+$route['home/index'] 	= "home/index";
+
+$route['logout']		= "auth/logout";
+$route['auth/logout']	= "auth/logout";
+
+$route['subject/(:any)']= "subject/subject/$1";
 
 $route['(:any)'] = 'pages/$1';
 // $route['(:any)'] = 'category/$1';

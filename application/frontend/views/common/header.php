@@ -98,7 +98,8 @@
 		    <div class="col-md-4">
 			<div class="logo">
 			    <a href="#" title="Universe" rel="home">
-				<img style="width: 100px;" src="<?php echo base_url(); ?>images/logo2.png" alt="Universe">
+				<!-- <img style="width: 100px;" src="<?php echo base_url(); ?>images/logo2.png" alt="Universe"> -->
+				<h1 style="color: #fff;">SKILL TEST BD</h1>
 			    </a>
 			</div> 
 		    </div>  
@@ -106,8 +107,16 @@
 		    <div class="col-md-offset-4 col-md-4">
 			<ul class="nav navbar-nav navbar-right">
 
-			    <li><a href="<?php echo base_url(); ?>login" style="margin-top:20px;"><span class="glyphicon glyphicon-lock"></span>Login</a></li>
-			    <li><a href="<?php echo base_url(); ?>register" style="margin-top:20px;"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+				<?php $user_id = $this->session->userdata('user_id'); 
+				
+				if ($user_id!=TRUE) { ?>
+					<li><a href="<?php echo base_url(); ?>login" style="margin-top:20px;"><span class="glyphicon glyphicon-lock"></span>Login</a></li>
+			    	<li><a href="<?php echo base_url(); ?>register" style="margin-top:20px;"><span class="glyphicon glyphicon-user"></span>Register</a></li>
+				<?php }elseif ($user_id==TRUE) { ?>
+					<li><a href="<?php echo base_url(); ?>logout" style="margin-top:20px;"><span class="glyphicon glyphicon-user"></span>Log Out</a></li>					
+				<?php } ?>
+
+			    
 			</ul>
 
 		    </div>
@@ -134,7 +143,7 @@
 					    <?php if (count($subject_name > 0)) { ?>
 						<ul class="sub-menu">
 						    <?php foreach ($subject_name as $value) { ?>
-	    					    <li><a href="<?php echo base_url(); ?>exam/subject/<?php echo $value->id; ?>"><?php echo $value->name; ?></a></li>
+	    					    <li><a href="<?php echo base_url(); ?>subject/<?php echo $value->id; ?>"><?php echo $value->name; ?></a></li>
 						    <?php } ?>
 
 
@@ -193,11 +202,11 @@
 
 
                         <ul class="social-icons pull-right">
-                            <li><a href="index.html#" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="index.html#" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="index.html#" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="index.html#" data-toggle="tooltip" title="Google+"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="index.html#" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="<?php echo base_url(); ?>" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="<?php echo base_url(); ?>" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="<?php echo base_url(); ?>" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="<?php echo base_url(); ?>" data-toggle="tooltip" title="Google+"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="<?php echo base_url(); ?>" data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>
                         </ul> <!-- /.social-icons -->
 
 		    </nav> <!-- /.main-navigation -->
@@ -242,3 +251,4 @@
        // }
        ?>
 </div>
+

@@ -8,7 +8,7 @@ class Exam extends CI_Controller {
 
 		$this->load->model('exam_model');
 
-		$this->uid = $this->session->userdata('uid');
+		$this->uid = $this->session->userdata('user_id');
 
 		$check_exist_exam = $this->exam_model->check_exist_exam($this->uid);
 
@@ -42,9 +42,42 @@ class Exam extends CI_Controller {
     	$this->load->view('subject/exam_page', $data);
     }
 
-    public function create_exam($category_id, $subject_id){
+    public function create_exam($category_id=NULL, $subject_id=NULL){
+        
     	$data = array();
     	$data['user_id'] = $this->uid;
-    	$this->exam_model->create_exam($category_id, $subject_id);
+        $data['exam_status'] = 1;
+        $data['number_of_question'] = $this->input->post('question_select');
+        $data['date'] = date("Y-m-d");
+        $data['exam_start_time'] = date("h:i:sa");
+        $data['exam_end_time'] = date("h:i:sa");
+        $data['result'] = "Good";
+        
+        $check_exist_exam = $this->exam_model->check_exist_exam($this->uid);
+
+        if ($check_exist_exam==TRUE) {
+            $data['exam_list'] = $this->common_model->selectAllWhere('tbl_exam', array('user_id' => $this->uid));
+
+            $this->load->view('exam/index', $data);            
+        }
+
+        // echo "<pre>";
+        // print_r($check_exist_exam);
+        // exit();
+        
+    	// $insert_id = $this->db->insert('tbl_exam', $data);
+        //$this->exam_model->create_exam($category_id, $subject_id);
+
+        $number_question = $this->input->post('question_select');
+
+        $first_time = date("h:i:sa");
+        $second_time = date("1:i:sa");
+
+        $this->load->library('time_calculator');
+
+        // $result = $this->time_calculator->add_time($first_time);
+        $result = $this->time_calculator->add_date_time($first_time);
+        
+        
     }
 }

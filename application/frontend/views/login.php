@@ -27,7 +27,10 @@
                                                 </div>
                                                 <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
                                             <?php echo form_close(); ?>
-                                            <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
+                                            
+                                            <p class="pull-left">Don't Have an Account <a href="<?php echo base_url(); ?>register">Register</a> Please </p>
+                                            <a href="javascript:;" class="forget pull-right" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
+                                            
                                             <hr>
                                         </div>
                                     </div> <!-- /.col-xs-12 -->

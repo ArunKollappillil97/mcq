@@ -48,7 +48,7 @@
                                 <div class="list-event-header">
                                     <span class="event-place small-text"><i class="fa fa-globe"></i>109 Health</span>
                                     <span class="event-date small-text"><i class="fa fa-calendar-o"></i>January 08, 2014</span>
-                                    <div class="view-details"><a href="<?php echo base_url(); ?>subject/view_details" class="lightBtn">View Details</a></div>
+                                    <div class="view-details"><a href="<?php echo base_url(); ?>subject/view_details/1" class="lightBtn">View Details</a></div>
                                 </div>
                                 <h5 class="event-title"><a href="event-single.html">January Career Centre Events for Grad Students</a></h5>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cum, quidem aut natus odit deleniti placeat quia est quibusdam hic. Quod, minima, excepturi eum repellat tempora...</p>
@@ -65,7 +65,7 @@
                                 <div class="list-event-header">
                                     <span class="event-place small-text"><i class="fa fa-globe"></i>109 Health</span>
                                     <span class="event-date small-text"><i class="fa fa-calendar-o"></i>January 08, 2014</span>
-                                    <div class="view-details"><a href="<?php echo base_url(); ?>subject/view_details" class="lightBtn">View Details</a></div>
+                                    <div class="view-details"><a href="<?php echo base_url(); ?>subject/view_details/1" class="lightBtn">View Details</a></div>
                                 </div>
                                 <h5 class="event-title"><a href="event-single.html">January Career Centre Events for Grad Students</a></h5>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cum, quidem aut natus odit deleniti placeat quia est quibusdam hic. Quod, minima, excepturi eum repellat tempora...</p>
@@ -82,7 +82,7 @@
                                 <div class="list-event-header">
                                     <span class="event-place small-text"><i class="fa fa-globe"></i>109 Health</span>
                                     <span class="event-date small-text"><i class="fa fa-calendar-o"></i>January 08, 2014</span>
-                                    <div class="view-details"><a href="<?php echo base_url(); ?>subject/view_details" class="lightBtn">View Details</a></div>
+                                    <div class="view-details"><a href="<?php echo base_url(); ?>subject/view_details/1" class="lightBtn">View Details</a></div>
                                 </div>
                                 <h5 class="event-title"><a href="event-single.html">January Career Centre Events for Grad Students</a></h5>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cum, quidem aut natus odit deleniti placeat quia est quibusdam hic. Quod, minima, excepturi eum repellat tempora...</p>
@@ -99,7 +99,7 @@
                                 <div class="list-event-header">
                                     <span class="event-place small-text"><i class="fa fa-globe"></i>109 Health</span>
                                     <span class="event-date small-text"><i class="fa fa-calendar-o"></i>January 08, 2014</span>
-                                    <div class="view-details"><a href="<?php echo base_url(); ?>subject/view_details" class="lightBtn">View Details</a></div>
+                                    <div class="view-details"><a href="<?php echo base_url(); ?>subject/view_details/1" class="lightBtn">View Details</a></div>
                                 </div>
                                 <h5 class="event-title"><a href="event-single.html">January Career Centre Events for Grad Students</a></h5>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cum, quidem aut natus odit deleniti placeat quia est quibusdam hic. Quod, minima, excepturi eum repellat tempora...</p>
