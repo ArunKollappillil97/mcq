@@ -13,10 +13,7 @@ class Auth extends CI_Controller {
 	}
 
 	public function login(){
-		echo "<pre>";
-		print_r($_POST);
-		exit();
-		
+				
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'key', 'required');
 
