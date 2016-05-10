@@ -80,4 +80,15 @@ class Exam extends CI_Controller {
         
         
     }
+
+    public function take_exam($id=NULL){
+        if ($id!==NULL OR $id!=="") {
+            
+
+
+
+
+            
+        }
+    }
 }
