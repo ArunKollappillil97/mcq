@@ -83,12 +83,16 @@ class Exam extends CI_Controller {
 
     public function take_exam($id=NULL){
         if ($id!==NULL OR $id!=="") {
+            $get_mcq_exam_question = $this->common_model->selectAll('tbl_question');
+
+            echo "<pre>";
+            print_r($get_mcq_exam_question);
+            exit();
             
 
 
 
 
-            
         }
     }
 }

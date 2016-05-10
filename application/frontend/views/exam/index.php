@@ -70,7 +70,7 @@
                     				<td><?php echo $value->exam_end_time; ?></td>
                     				<td><?php echo $value->result; ?></td>
                     				<td>
-									<a href="<?php echo base_url() ?>" class="btn btn-primary">Take Exam</a>
+									<a href="<?php echo base_url() ?>exam/take_exam/<?php echo $value->id; ?>" class="btn btn-primary">Take Exam</a>
                     				</td>
                     			</tr>
 
