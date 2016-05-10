@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 09, 2016 at 12:50 PM
+-- Generation Time: May 10, 2016 at 08:55 PM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -83,6 +83,7 @@ INSERT INTO `tbl_category` (`id`, `name`, `serial`, `date`, `category_image`, `c
 CREATE TABLE IF NOT EXISTS `tbl_exam` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(4) NOT NULL,
+  `number_of_question` int(3) NOT NULL,
   `exam_status` tinyint(1) DEFAULT NULL,
   `date` date NOT NULL,
   `exam_start_time` varchar(20) NOT NULL,
@@ -90,7 +91,20 @@ CREATE TABLE IF NOT EXISTS `tbl_exam` (
   `result` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `tbl_exam`
+--
+
+INSERT INTO `tbl_exam` (`id`, `user_id`, `number_of_question`, `exam_status`, `date`, `exam_start_time`, `exam_end_time`, `result`) VALUES
+(1, 1, 10, 1, '2016-05-10', '05:38:29pm', '05:38:29pm', 'Good'),
+(2, 1, 10, 1, '2016-05-10', '05:52:11pm', '05:52:11pm', 'Good'),
+(3, 1, 20, 1, '2016-05-10', '05:58:30pm', '05:58:30pm', 'Good'),
+(4, 1, 10, 1, '2016-05-10', '07:26:46pm', '07:26:46pm', 'Good'),
+(5, 1, 10, 1, '2016-05-10', '07:28:39pm', '07:28:39pm', 'Good'),
+(6, 1, 10, 1, '2016-05-10', '07:30:08pm', '07:30:08pm', 'Good'),
+(7, 1, 10, 1, '2016-05-10', '07:30:11pm', '07:30:11pm', 'Good');
 
 -- --------------------------------------------------------
 
