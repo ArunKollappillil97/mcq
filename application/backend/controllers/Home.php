@@ -6,8 +6,11 @@ class Home extends CI_Controller {
 	public function __construct(){
 		parent:: __construct();
 
-		if (!$this->session->userdata('user_logged')) {
-        	
+		$this->user_role = $this->session->userdata('user_role');
+		$this->user_logged = $this->session->userdata('user_logged');
+		
+        if (!$this->session->userdata('user_logged')) {
+                        
             $msg = "Sorry You Are Not Loged In";
             $this->session->set_flashdata('success', $msg);
                         
@@ -17,6 +20,7 @@ class Home extends CI_Controller {
 
 	public function index(){
 		$data = array();
+	
 
 		$data['header'] = $this->load->view('common/header', '', TRUE);
 		$data['sidebar'] = $this->load->view('common/sidebar', '', TRUE);

@@ -3,6 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Category extends CI_Controller {
 
+	public function __construct(){
+		parent:: __construct();
+
+		$this->user_role = $this->session->userdata('user_role');
+		
+        if (!$this->session->userdata('user_logged') && $this->user_role!=1) {
+            redirect('login');
+        }
+
+	}
+
 	public function index(){
 		$data = array();
 		$sub_data = array();

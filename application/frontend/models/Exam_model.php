@@ -40,5 +40,15 @@ class Exam_model extends CI_Model{
             'exam_end_time' => date("h:i:sa")
             ));
     }
+
+    public function process_exam($exam_id){
+        $this->db->select('*');
+        $this->db->where_in('id', $exam_id);
+        $this->db->from('tbl_question');
+
+        $query_result = $this->db->get();
+        $result = $query_result->result_array();
+        return $result;
+    }
     
 }

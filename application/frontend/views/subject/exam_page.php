@@ -29,29 +29,41 @@
                             <h4 class="widget-title">Generel Knowledge</h4>
                         </div>
                         <div class="widget-inner multiple_choise">
-                            
-                            <p>3. Lorem ipsum dolor sit amet, consectetur a?</p>
+                            <?php echo form_open(); ?>
+                            <p><?php echo $serial.". "; echo $exam_question['question']; ?></p>
                             <!-- <hr> -->
                             <ul>
-                                <li><input type="radio" name="question1">Lorem ipsum dolor sit amet</li>
-                                <li><input type="radio" name="question1">Lorem ipsum dolor sit amet</li>
-                                <li><input type="radio" name="question1">Lorem ipsum dolor sit amet</li>
-                                <li><input type="radio" name="question1">Lorem ipsum dolor sit amet</li>
+                            <?php 
+                            $option_list = $this->common_model->selectAllWhere('tbl_option', array('question_id' => $exam_question['id']));
+                            // echo "<pre>";
+                            // print_r($option_list);
+                            // echo "</pre>";
+                            foreach ($option_list as $key => $value) { ?>
+                                <li><input type="radio" name="question1" value="<?php echo $value->id; ?>"><?php echo $value->option_name; ?></li>
+                                <?php } ?>
+                                
 
                             </ul>
                             
                             <hr>
-                            <a href="<?php echo base_url(); ?>exam/exam_page" class="btn btn-primary">Next Question</a>
-                            <a href="<?php echo base_url(); ?>exam/exam_page" class="btn btn-primary">Skipp Question</a>
-                            <a href="<?php echo base_url(); ?>exam/exam_page" class="btn btn-primary">End Exam</a>
+                            <?php 
 
+                            echo form_submit('question_submit', 'Next Question', array('class' => 'btn btn-primary')); 
+
+                            echo form_submit('skipp_question', 'Skipp Question', array('class' => 'btn btn-primary')); 
+
+                            echo form_submit('end_exam', 'End Exam', array('class' => 'btn btn-primary')); 
+
+                           form_close(); 
+
+                           ?>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                          <div class="widget-main-title">
                             <!-- <h4 class="widget-title">Test Content</h4> -->
-                            <h3 style="margin: 0; padding: 0;">Number of Question - 11/20</h3>
+                            <h3 style="margin: 0; padding: 0;">Number of Question - <?php echo $serial." /";   echo $number_of_question; ?></h3>
                         </div>
                         <div class="widget-inner">
                             <div id="clockdiv" class="pull-right">

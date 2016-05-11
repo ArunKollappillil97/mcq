@@ -6,6 +6,15 @@ class Question extends CI_Controller {
 	public function __construct(){
 		parent:: __construct();
 		$this->uid = $this->session->userdata('uid');
+
+		$this->user_role = $this->session->userdata('user_role');
+		
+        if (!$this->session->userdata('user_logged') && $this->user_role!=1) {
+        	$msg = "Sorry You Are Not Loged In";
+            $this->session->set_flashdata('success', $msg);
+                        
+        	redirect('auth');
+        }
 	}
 
 	public function index(){
