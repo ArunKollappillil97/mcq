@@ -122,17 +122,17 @@ class Exam extends CI_Controller {
             $question_number_list = $this->exam_model->process_exam($question_id);
             
             foreach ($question_number_list as $value) {
-                $question_number_listt[] = $value = array_merge($value, array('examped' => '0'));
+                $question_number_listt[] = $value = array_merge($value, array('examped' => '0', 'skipped' => ''));
                             
             }
             
             $this->session->set_userdata('question_number_listt', $question_number_listt);
 
-            echo "<pre>";
-            print_r($this->session->userdata('question_number_listt'));
-            exit();
+            // echo "<pre>";
+            // print_r($this->session->userdata('question_number_listt'));
+            // exit();
             
-
+            redirect('exam/take_exam');
             // $question_list = $this->exam_model->process_exam();
         }else{
             // echo "<pre>";
@@ -147,9 +147,11 @@ class Exam extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form');
 
+        
+
         $exist_exam = $this->session->userdata('question_number_listt');
 
-        if ($exist_exam!=NULL) {
+        if ($exist_exam!=NULL && $_POST!==NULL) {
             // $get_mcq_exam_question = $this->common_model->selectAll('tbl_question');
 
             // echo "<pre>";
@@ -157,6 +159,7 @@ class Exam extends CI_Controller {
             // exit();
             
             
+
             $data= array();
             $data['exam_question']      = $exist_exam[0];
             $data['serial']             = '1';
