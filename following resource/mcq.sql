@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 10, 2016 at 09:08 PM
+-- Generation Time: May 11, 2016 at 10:38 PM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `tbl_exam` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `category_id` (`category_id`,`subject_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tbl_exam`
@@ -107,7 +107,29 @@ INSERT INTO `tbl_exam` (`id`, `user_id`, `number_of_question`, `category_id`, `s
 (4, 1, 10, 1, 3, 1, '2016-05-10', '07:26:46pm', '07:26:46pm', 'Good'),
 (5, 1, 10, 5, 4, 1, '2016-05-10', '07:28:39pm', '07:28:39pm', 'Good'),
 (6, 1, 10, 5, 4, 1, '2016-05-10', '07:30:08pm', '07:30:08pm', 'Good'),
-(7, 1, 10, 5, 4, 1, '2016-05-10', '07:30:11pm', '07:30:11pm', 'Good');
+(7, 1, 10, 5, 4, 1, '2016-05-10', '07:30:11pm', '07:30:11pm', 'Good'),
+(18, 2, 10, 5, 4, 1, '2016-05-11', '08:28:28pm', '08:28:28pm', 'Good');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_exam_question`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_exam_question` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `exam_id` int(6) NOT NULL,
+  `question_id` text NOT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_exam_question`
+--
+
+INSERT INTO `tbl_exam_question` (`id`, `exam_id`, `question_id`, `status`) VALUES
+(1, 18, '2,3,4,5,6,7,8,9,10,11,12', 1);
 
 -- --------------------------------------------------------
 
@@ -254,14 +276,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `user_role` (`user_role`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `user_role`, `date`, `status`) VALUES
-(1, 'admin', 'Tasfir Hossain', 'Suman', 'tasfirsuman@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1, '2016-05-08 11:48:05', 1);
+(1, 'admin', 'Tasfir Hossain', 'Suman', 'tasfirsuman@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1, '2016-05-08 11:48:05', 1),
+(2, 'tasfirsuman', 'Tasfir Hossain', 'Suman', 'suman0359@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 5, '2016-05-11 09:27:42', 1),
+(3, 'micron', 'Micron', 'Techno', 'micron@gmail.com', '4e8192d5c24a51e5fda5e9e010296aaa', 1, '2016-05-11 09:29:05', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
