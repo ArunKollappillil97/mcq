@@ -215,26 +215,36 @@ class Exam extends CI_Controller {
                 **/
 
                 // print_r($submited_question_answered_id);
-               var_dump($skipped_question);
+               
                 if($skipped_question!=1){
                     foreach ($option_list as $key => $value) {
-                        if($value['question_id']==2){
+                        if($value['question_id']==$submited_question_answered_id){
                             echo "<pre>";
                             print_r($value);
-                            if($value['ans']!=0) $right_answer = $value['id']; 
-                            if($right_answer==$ansered_question_option_no){ $wrong_answer=0; $correct_ans_field = $value['id']; }else{$wrong_answer=$ansered_question_option_no; }
+
+                            if($value['ans']!=0){ 
+                                $right_answer = $value['id']; $wrong_answer = 0; break;
+                            }else{
+                                $wrong_answer = $ansered_question_option_no; 
+                            } 
+
+                            // if($right_answer==$ansered_question_option_no){ 
+                            //     $wrong_answer=0; $correct_ans_field = $value['id']; 
+                            // }else{
+                            //     $wrong_answer=$ansered_question_option_no; 
+                            // }
                             
                         }
                         
                     }
                 }
 
-                exit();
+                // exit();
 
                 /*
                 | Change multiple option value 
                 **/
-                $_SESSION['question_number_listt'][$exam_question_id]['answered_id']='1';
+                // $_SESSION['question_number_listt'][$exam_question_id]['answered_id']='1';
 
                 $_SESSION['submited_answer'][$exam_question_id]= array(
                 'id'                => $submited_question_answered_id, 
@@ -243,11 +253,14 @@ class Exam extends CI_Controller {
                 'skipped'           => $skipped_question, 
                 'wrong_answer'      => $wrong_answer,
                 'right_answer'      => $right_answer,
-                'correct_ans_field' => $correct_ans_field
+                'correct_ans_field' => $right_answer
                 );
 
                 /* ***************************************************************** */
                 // redirect('exam/take_exam');
+
+                print_r($_SESSION['submited_answer']);
+                exit();
 
                 echo "<pre>";
                 $ansered_question = $this->input->post('option');
