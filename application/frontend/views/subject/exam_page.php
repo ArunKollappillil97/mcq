@@ -29,17 +29,15 @@
                             <h4 class="widget-title">Generel Knowledge</h4>
                         </div>
                         <div class="widget-inner multiple_choise">
-                            <?php echo form_open(); ?>
+                            <?php echo form_open(); $serial = $exam_question_id+1; ?>
                             <p><?php echo $serial.". "; echo $exam_question['question']; ?></p>
-                            <!-- <hr> -->
+
                             <ul>
                             <?php 
                             $option_list = $this->common_model->selectAllWhere('tbl_option', array('question_id' => $exam_question['id']));
-                            // echo "<pre>";
-                            // print_r($option_list);
-                            // echo "</pre>";
+
                             foreach ($option_list as $key => $value) { ?>
-                                <li><input type="radio" name="question1" value="<?php echo $value->id; ?>"><?php echo $value->option_name; ?></li>
+                                <li><input type="radio" name="option" value="<?php echo $value->id; ?>"><?php echo $value->option_name; ?></li>
                                 <?php } ?>
                                 
 

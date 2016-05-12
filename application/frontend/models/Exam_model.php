@@ -50,5 +50,21 @@ class Exam_model extends CI_Model{
         $result = $query_result->result_array();
         return $result;
     }
+
+    public function select_all_option_by_question_id($question_id_list){
+        $this->db->select('*');
+        $this->db->where_in('question_id', $question_id_list);
+        $this->db->from('tbl_option');
+
+        $query_result = $this->db->get();
+        $result = $query_result->result_array();
+        return $result;
+    }
+
+    public function end_exam($exam_id){
+        $this->db->set('exam_status', 0);
+        $this->db->where('id', $exam_id);
+        $this->db->update('tbl_exam');
+    }
     
 }
