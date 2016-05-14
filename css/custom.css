@@ -331,3 +331,22 @@
 .form-bottom{
     padding-bottom: 30px;
 }
+
+/*
+| Exam Review Page StyleSheet  
+**/
+
+.multiple_choise .wrong{
+    background: #BB0000;
+    color: #ccc;
+}
+
+.multiple_choise .right{
+    background: #37a000;
+    color: #ccc;
+}
+
+.multiple_choise .skipped{
+    background: yellow;
+    color: #ccc;
+}

@@ -33,8 +33,8 @@ class Exam_model extends CI_Model{
     }
 
     public function create_exam($category_id, $subject_id){
-        $this->db->insert('tbl_exam', array('
-            user_id' => $this->uid, 
+        $this->db->insert('tbl_exam', array(
+            'user_id' => $this->uid, 
             'exam_status' => 1, 
             'exam_start_time' => date("h:i:sa"),
             'exam_end_time' => date("h:i:sa")
