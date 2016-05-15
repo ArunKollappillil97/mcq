@@ -34,38 +34,14 @@
                         <div class="widget-main-title">
                             <h4 class="widget-title">Generel Knowledge</h4>
                         </div>
-                        <div class="widget-inner multiple_choise">
-                            <?php echo form_open('exam/calculate_current_exam'); $serial = $exam_question_id+1; ?>
-                            <p><?php echo $serial.". "; echo $exam_question['question']; ?></p>
+                        <div class="widget-inner multiple_choise" style="min-height: 300px;">
+                            <h3>You Are Finished All Question </h3>
 
-                            <ul>
                             <?php 
-                            $option_list = $this->common_model->selectAllWhere('tbl_option', array('question_id' => $exam_question['id']));
+                            echo form_open('exam/calculate_current_exam');
 
-                            foreach ($option_list as $key => $value) { ?>
-                                <li><input type="radio" <?php if($answered_option_id==$value->id) echo "checked"; ?> name="option" value="<?php echo $value->id; ?>"  /><?php echo $value->option_name; ?></li>
-                                <?php } ?>
-                                
-
-                            </ul>
-                            
-                            <hr>
-                            <?php 
-
-                            echo form_hidden('exam_question_id', $exam_question_id);
-
-                            if($exam_question_id<=0){ echo form_submit('previous_question_submit', 'Previous Question', array('class' => 'btn btn-primary', 'disabled' => 'disabled')); }else{
-                              echo form_submit('previous_question_submit', 'Previous Question', array('class' => 'btn btn-primary')); 
-
-                            }
-
-                            if($serial == $number_of_question+1){
-                            echo form_submit('next_question_submit', 'Next Question', array('class' => 'btn btn-primary', 'disabled' => 'disabled')); 
-                            }else{
-                            echo form_submit('next_question_submit', 'Next Question', array('class' => 'btn btn-primary')); 
-                          }
-
-                            // echo form_submit('skipp_question', 'Skipp Question', array('class' => 'btn btn-primary')); 
+                            echo form_submit('review_all_question', 'Review All Question', array('class' => 'btn btn-primary')); 
+                            echo form_submit('review_skipped_question', 'Review Only Missing Question', array('class' => 'btn btn-primary')); 
 
                             echo form_submit('end_exam', 'End Exam', array('class' => 'btn btn-primary pull-right')); 
 
