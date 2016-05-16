@@ -37,11 +37,57 @@
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
         <!-- Page Content -->
         <div id="page-content-wrapper" class="min_height">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-md-12">
+                        <?php 
+                        // echo "<pre>";
+                        // print_r($question_number_list);
+                        // exit();
+                        
+                            $total_correct_answer   = 0;
+                            $total_wrong_answer     = 0;
+                            $total_missing_answer   = 0;
+                            foreach ($question_number_list as $value) {
+
+                                if($value['correct_answer']!=NULL && $value['answered_option_id']!=NULL) {
+                                    $total_correct_answer+=1;
+                                }
+
+                                if($value['wrong_answer']!=NULL) {
+                                    $total_wrong_answer= $total_wrong_answer + 1;
+                                    // echo "Wrong Answer : ".$value['wrong_answer']."<br>";
+
+                                }
+
+                                if($value['answered_option_id']!=NULL) {
+                                    $total_missing_answer = $total_missing_answer + 1;
+                                    // echo "Missing Answer : ".$value['answered_option_id']."<br>";
+                                    
+                                }
+
+                                
+                            }
+
+                         ?>
+                        <p> Total Number of Question : <?php echo $number_of_question; ?></p>
+                        <p> Total Correct Answer of Out of Question : <?php echo $total_correct_answer; ?> </p>
+                        <p> Total Wrong Answer of Out of Question : <?php echo $total_wrong_answer; ?> </p> 
+                        <p> Total Missing Answer of Out of Question : <?php echo $total_missing_answer; ?> </p>
+                        <p> Finish The Exam withing Time : <?php echo $total_correct_answer; ?> </p>
+                    </div>
                     <div class="col-lg-12">
                         <h1>Exam List</h1>
                         
@@ -54,29 +100,19 @@
                         </div>
                         <div class="widget-inner multiple_choise">
                             <?php 
-                            echo "<pre>";
-                            print_r($question_number_list);
-                            echo "</pre>";
-                            exit();
+
+                            // echo "<pre>";
+                            // print_r($question_number_list);
+                            // echo "</pre>";
+                            // exit();
                             
+  
                             foreach ($question_number_list as $key => $value) { 
-                                $serial         = $key+1; 
-                                $question_name  = $value['question'];
-                                $question_id    = $value['id'];
-                                // $skipped        = $value['skipped'];
-                                $right_answer   = $value['answered_option_id'];
-                                $wrong_answer   = $value['wrong_answer'];
-
-                                // print_r($value);
-                                // echo "<br>";
-                                // // echo "Skipped Answer : "; print_r($skipped);
-                                // echo "<br>";
-                                // echo "Right Answer : "; print_r($right_answer);
-                                // echo "<br>";
-                                // echo "Wrong Answer : "; var_dump($wrong_answer);
-
-                                // exit();
-                                
+                                $serial                 = $key+1; 
+                                $question_name          = $value['question'];
+                                $question_id            = $value['id'];
+                                $answered_option_id     = $value['answered_option_id'];
+                                $wrong_answer           = $value['wrong_answer'];
 
                             ?>
                             <p><?php echo $serial.". "; echo $question_name; ?></p>
@@ -88,18 +124,12 @@
 
                             foreach ($option_list as $key => $value) { 
                                 $option_id = $value->id;
-                                // print_r($value);
-                            // if ($value->ans!=0) {
-                            //     $right_ans = $value->ans;
-                             
-                            //     }
 
                             ?>
                             
                             <?php //echo $value->id; ?><li class="<?php 
                                 if($value->ans) echo "right "; 
-                                if($option_id       == $wrong_answer) echo "wrong"; 
-                                // if($skipped         == 0) echo "skipped"; 
+                                if($wrong_answer == $option_id) echo "wrong"; 
 
                                 ?>"><input type="radio" name="option" value="<?php echo $value->id; ?>" disabled><?php echo $value->option_name; ?></li>
                                 <?php } ?>

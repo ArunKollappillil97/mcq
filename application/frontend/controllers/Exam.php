@@ -116,7 +116,6 @@ class Exam extends CI_Controller {
     public function exam_process($exam_id){
         $exist_exam = $this->session->userdata('question_number_listt');
         
-        
         if($exist_exam==NULL) {
 
 
@@ -125,18 +124,13 @@ class Exam extends CI_Controller {
 
             $question_id = explode(",", $get_mcq_exam_question->question_id);
 
-            
             $question_number_list = $this->exam_model->process_exam($question_id);
-            
             
             foreach ($question_number_list as $value) {
                 $question_number_listt[] = $value = array_merge($value, array('answered_option_id' => '0', 'take_exam' => '0'));
-                            
             }
             
-
-            
-            $question_list = $this->exam_model->process_exam($question_id);
+            // $question_list = $this->exam_model->process_exam($question_id);
 
             $option_list = $this->exam_model->select_all_option_by_question_id($question_id);     
 
@@ -151,19 +145,23 @@ class Exam extends CI_Controller {
     }
 
     public function take_exam($id=NULL){
-        $this->load->library('form_validation');
+        // echo "<pre>";
+        // print_r($_SESSION);
+        // exit();
+        
         $this->load->helper('form');
 
         $exist_exam = $this->session->userdata('question_number_listt');
         $option_list = $this->session->userdata('option_list');
 
-        $next_question_submit = $this->input->post('question_submit');
-        $previous_question_submit = $this->input->post('previous_question_submit');
+        $next_question_submit       = $this->input->post('question_submit');
+        $previous_question_submit   = $this->input->post('previous_question_submit');
+        $previous_question_submit   = $this->input->post('previous_question_submit');
 
 
         foreach ($exist_exam as $key => $value) {
             if ($value['take_exam']==0) {
-                
+                $take_exam = $value['take_exam'];
                 $exam_question_id = $key;
                 if($exam_question_id < 0 ) $exam_question_id=0;
                 $answered_option_id = $value['answered_option_id'];
@@ -175,8 +173,9 @@ class Exam extends CI_Controller {
             }
         }
 
+
         if ($exist_exam !=NULL) {
-           $data= array();
+            $data= array();
             $data['exam_question']      = $exist_exam[$exam_question_id];
             $data['exam_question_id']   = $exam_question_id;
             $data['answered_option_id'] = $exist_exam[$exam_question_id]['answered_option_id'];
@@ -187,21 +186,35 @@ class Exam extends CI_Controller {
 
             $this->session->set_userdata($answer_submit);
 
-            if($take_exam==NULL){
+            if($take_exam==0 && $take_exam !=NULL){
                 $this->load->view('subject/exam_page', $data);    
             }
 
-            // if($take_exam==NULL){
-            //     $this->load->view('exam/review_page', $data); 
-            // }
+            if($take_exam==NULL){
+                $this->load->view('exam/review_page', $data); 
+            }
+
+            /*
+            | End Exam Section and redirect to View Result 
+            **/
+            if(isset($end_exam)!=NULL){
+               
+                redirect('exam/review_exam');
+            }
             
         }
 
     }
 
+    /*
+    | Calculate All Take Exam Section and Proccessing Section 
+    | Author : Tasfir Hossain Suman
+    **/
+
     public function calculate_current_exam(){
         $next_question_submit       = $this->input->post('next_question_submit');
         $previous_question_submit   = $this->input->post('previous_question_submit');
+        $end_exam                   = $this->input->post('end_exam');
 
         $exam_question_id           = $this->input->post('exam_question_id');
 
@@ -212,9 +225,37 @@ class Exam extends CI_Controller {
         **/
         if ($next_question_submit!=NULL) {
 
+            // echo "<pre>";
+            // print_r($_SESSION['question_number_listt'][$exam_question_id]);
+            // exit();
+            
+
             $_SESSION['question_number_listt'][$exam_question_id]['answered_option_id'] = $ansered_question_option_no;
+
+            /*
+            | Currect or Wrong Answer Calculation 
+            **/
+
+            foreach ($_SESSION['option_list'] as $key => $value) {
+                if($value['question_id']==$_SESSION['question_number_listt'][$exam_question_id]['id']){
+                    
+                    if($value['ans']!=0) {
+                        $correct_answer= $value['id'];
+                        break;
+                    }
+                }
+            }
+
+            if($correct_answer == $ansered_question_option_no){
+                $correct_answer == $correct_answer;
+            }else{
+                $wrong_answer = $ansered_question_option_no;
+            }
+            /************* end: Wrong Answer Calculation **************************/
+
             $_SESSION['question_number_listt'][$exam_question_id]['take_exam']          = '1';
-            $_SESSION['question_number_listt'][$exam_question_id]['wrong_answer']       = "";
+            $_SESSION['question_number_listt'][$exam_question_id]['correct_answer']     = $correct_answer;
+            $_SESSION['question_number_listt'][$exam_question_id]['wrong_answer']       = $wrong_answer;
 
             redirect('exam/take_exam');
         }
@@ -223,7 +264,7 @@ class Exam extends CI_Controller {
         | Thir Section is for Previous Question Section 
         **/
         if ($previous_question_submit!=NULL) {
-            $exam_question_id = $exam_question_id-1;
+            $exam_question_id   = $exam_question_id-1;
             if($exam_question_id < 0) $exam_question_id = 0;
 
             $_SESSION['question_number_listt'][$exam_question_id]['take_exam']='0';
@@ -243,30 +284,49 @@ class Exam extends CI_Controller {
             redirect('exam/take_exam');
         }
         
-
         /*
         | Thir Section is for Review Only Missed OR Skipped Question Section 
         **/
-        $review_skipped_question = $this->input->post('review_skipped_question');
+        $review_skipped_question    = $this->input->post('review_skipped_question');
         if($review_skipped_question!=NULL){
             foreach ($_SESSION['question_number_listt'] as $key => $value) {
-                if($value->answered_option_id!=0){
+               
+                if($value['answered_option_id']==NULL){
                     $_SESSION['question_number_listt'][$key]['take_exam']= '0';
                 }
             }
             redirect('exam/take_exam');
         }
 
+        /*
+        | End Exam Section and redirect to View Result 
+        **/
+        if($end_exam!=NULL){
+        // echo "<pre>";
+        // print_r($_SESSION);
+        // exit();
+        
+        /*
+        | Session List 
+        **/
+        // $_SESSION['question_number_listt'];
+        // $_SESSION['option_list'];
+        /* *************************************** */
+
+            redirect('exam/review_exam');
+        }
         
     }
+
+    /* **************** end: calculate_current_exam ***************** */
 
     public function take_exam_old($id=NULL){
        
         $this->load->library('form_validation');
         $this->load->helper('form');
 
-        $exist_exam = $this->session->userdata('question_number_listt');
-        $option_list = $this->session->userdata('option_list');
+        $exist_exam     = $this->session->userdata('question_number_listt');
+        $option_list    = $this->session->userdata('option_list');
 
         if ($exist_exam!=NULL && $_POST!==NULL) {
             
@@ -286,7 +346,7 @@ class Exam extends CI_Controller {
             }else{
                 $validation_status = FALSE ;
             }
-            /********************************************************/
+            /* ****************************************************** */
 
             /*
             | For Set Value Next Question 
@@ -307,7 +367,7 @@ class Exam extends CI_Controller {
             }else{
                 $previous_question_submit = FALSE ;
             }
-            /***********************************************************/
+            /* ********************************************************* */
 
             // if ($this->form_validation->run()!==$previous_question_submit) {
             if ($previous_question_submit==FALSE) {
@@ -315,11 +375,6 @@ class Exam extends CI_Controller {
                 foreach ($exist_exam as $key => $value) {
                     if ($value['answered_option_id']==0) {
                         $exam_question_id = $key;
-                        // echo "<pre>";
-                        // print_r($key);
-                        // echo "<br>";
-                        // print_r($value);
-                        // exit();
                         
                         break;
                     }else{
@@ -504,6 +559,14 @@ class Exam extends CI_Controller {
         $submited_answer    = $this->session->userdata('submited_answer');
         $option_list        = $this->session->userdata('option_list');
 
+echo "<pre>";
+// print_r($exist_exam);
+echo "<br>";
+// print_r($submited_answer);
+echo "<br>";
+print_r($option_list);
+exit();
+
         $get_mcq_exam_question = $this->common_model->getInfo('tbl_exam_question', array('exam_id' => $exam_id));
             $this->load->model('exam_model');
 
@@ -514,11 +577,26 @@ class Exam extends CI_Controller {
         
 
         $data= array();
-        $data['question_number_list']      = $submited_answer;// $question_number_list;
+        $data['question_number_list']      = $exist_exam;// $question_number_list;
         
         $data['serial']             = '1';
         $data['number_of_question'] = count($exist_exam);
 
         $this->load->view('exam/review_exam', $data);
+    }
+
+    /*
+    | View Exam Result Section Start From Here 
+    **/
+    public function veiw_exam_result(){
+        $exist_exam         = $this->session->userdata('question_number_listt');
+
+        $data= array();
+        $data['question_number_list']      = $exist_exam;// $question_number_list;
+        
+        $data['serial']             = '1';
+        $data['number_of_question'] = count($exist_exam);
+
+        $this->load->view('exam/veiw_exam_result', $data);
     }
 }
