@@ -350,3 +350,11 @@
     background: yellow;
     color: #ccc;
 }
+
+.multiple_choise .fa{
+    margin-left: -20px;
+}
+
+.bg-success {
+    background-color: #dff0d8;
+}

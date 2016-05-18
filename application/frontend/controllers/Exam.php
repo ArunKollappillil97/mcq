@@ -127,7 +127,7 @@ class Exam extends CI_Controller {
             $question_number_list = $this->exam_model->process_exam($question_id);
             
             foreach ($question_number_list as $value) {
-                $question_number_listt[] = $value = array_merge($value, array('answered_option_id' => '0', 'take_exam' => '0'));
+                $question_number_listt[] = $value = array_merge($value, array('answered_option_id' => '0', 'take_exam' => '0', 'correct_answer' => NULL, 'wrong_answer' => NULL));
             }
             
             // $question_list = $this->exam_model->process_exam($question_id);
@@ -225,11 +225,6 @@ class Exam extends CI_Controller {
         **/
         if ($next_question_submit!=NULL) {
 
-            // echo "<pre>";
-            // print_r($_SESSION['question_number_listt'][$exam_question_id]);
-            // exit();
-            
-
             $_SESSION['question_number_listt'][$exam_question_id]['answered_option_id'] = $ansered_question_option_no;
 
             /*
@@ -313,7 +308,7 @@ class Exam extends CI_Controller {
         // $_SESSION['option_list'];
         /* *************************************** */
 
-            redirect('exam/review_exam');
+            redirect('exam/veiw_exam_result');
         }
         
     }

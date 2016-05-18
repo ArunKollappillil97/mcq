@@ -246,9 +246,9 @@
         </div>
        <?php } 
        
-       // if(validation_errors()){
-       // 	echo validation_errors();
-       // }
+       if(validation_errors()){
+       	echo validation_errors();
+       }
        ?>
 </div>
 

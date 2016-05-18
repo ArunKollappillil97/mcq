@@ -68,10 +68,19 @@ class Auth extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		// $this->form_validation->set_rules('first_name', 'last_name', 'email', 'password', 'confirm_password', 'required');
+		$this->form_validation->set_rules('first_name', 'required');
+		$this->form_validation->set_rules('last_name', 'required');
 		$this->form_validation->set_rules('email', 'required');
+		$this->form_validation->set_rules('password', 'required');
+		$this->form_validation->set_rules('confirm_password', 'required');
 
 		if ($this->form_validation->run()==FALSE) {
+			// echo "<pre>";
+			// print_r($_POST);
+			// exit();
+			$msg = "Your Email is Already Registered";
+		    // $this->session->set_flashdata('success', $msg);
+		    
 			$this->load->view('register');
 		}else{
 			// echo "<pre>";
@@ -89,9 +98,9 @@ class Auth extends CI_Controller {
 
 			$check_email_address = $this->auth_model->check_exist('users', array('email', $email));
 
-			echo "<pre>";
-			print_r($check_email_address);
-			exit();
+			// echo "<pre>";
+			// print_r($check_email_address);
+			// exit();
 			
 
 			if ($check_email_address==TRUE) {

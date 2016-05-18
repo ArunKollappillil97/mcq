@@ -37,45 +37,34 @@
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
         <!-- Page Content -->
         <div id="page-content-wrapper" class="min_height">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
-                        // echo "<pre>";
-                        // print_r($question_number_list);
-                        // exit();
                         
+                            $total_answered_question   = 0;
                             $total_correct_answer   = 0;
                             $total_wrong_answer     = 0;
                             $total_missing_answer   = 0;
                             foreach ($question_number_list as $value) {
 
-                                if($value['correct_answer']!=NULL && $value['answered_option_id']!=NULL) {
+                                if($value['answered_option_id']!=0) {
+                                    $total_answered_question+=1;
+                                }
+
+                                if($value['correct_answer']==$value['answered_option_id']) {
                                     $total_correct_answer+=1;
                                 }
 
                                 if($value['wrong_answer']!=NULL) {
                                     $total_wrong_answer= $total_wrong_answer + 1;
-                                    // echo "Wrong Answer : ".$value['wrong_answer']."<br>";
-
                                 }
 
-                                if($value['answered_option_id']!=NULL) {
+                                if($value['answered_option_id']==0) {
                                     $total_missing_answer = $total_missing_answer + 1;
-                                    // echo "Missing Answer : ".$value['answered_option_id']."<br>";
-                                    
                                 }
 
                                 
@@ -83,10 +72,11 @@
 
                          ?>
                         <p> Total Number of Question : <?php echo $number_of_question; ?></p>
-                        <p> Total Correct Answer of Out of Question : <?php echo $total_correct_answer; ?> </p>
-                        <p> Total Wrong Answer of Out of Question : <?php echo $total_wrong_answer; ?> </p> 
-                        <p> Total Missing Answer of Out of Question : <?php echo $total_missing_answer; ?> </p>
-                        <p> Finish The Exam withing Time : <?php echo $total_correct_answer; ?> </p>
+                        <p> Total Answered Question : <?php echo $total_answered_question; ?></p>
+                        <p> Total Right Answer : <?php echo $total_correct_answer; ?></p>
+                        <p> Total Wrong Answer : <?php echo $total_wrong_answer; ?> </p> 
+                        <p> Total Missing Answer : <?php echo $total_missing_answer; ?> </p>
+                        <p> Finish The Exam withing Time : <?php //echo $total_missing_answer; ?> </p>
                     </div>
                     <div class="col-lg-12">
                         <h1>Exam List</h1>
@@ -101,12 +91,6 @@
                         <div class="widget-inner multiple_choise">
                             <?php 
 
-                            // echo "<pre>";
-                            // print_r($question_number_list);
-                            // echo "</pre>";
-                            // exit();
-                            
-  
                             foreach ($question_number_list as $key => $value) { 
                                 $serial                 = $key+1; 
                                 $question_name          = $value['question'];
@@ -115,6 +99,7 @@
                                 $wrong_answer           = $value['wrong_answer'];
 
                             ?>
+                            <?php if($value['answered_option_id']==0){ ?> <p class="bg-success"> This Question is Not Answered</p><?php } ?>
                             <p><?php echo $serial.". "; echo $question_name; ?></p>
 
                             <ul>
@@ -127,14 +112,19 @@
 
                             ?>
                             
-                            <?php //echo $value->id; ?><li class="<?php 
-                                if($value->ans) echo "right "; 
-                                if($wrong_answer == $option_id) echo "wrong"; 
+                        <li>
+                                <?php if($value->ans){ ?>
+                                    <i class="fa fa-check-square fa-lg right" aria-hidden="true"></i> 
+                                    <?php } ?> 
+                                    
+                                    <?php if($wrong_answer == $option_id){ ?>
+                                    <i class="fa fa-times fa-lg wrong" aria-hidden="true"></i>
+                                    <?php } ?>
 
-                                ?>"><input type="radio" name="option" value="<?php echo $value->id; ?>" disabled><?php echo $value->option_name; ?></li>
-                                <?php } ?>
+                                    <input value="<?php echo $value->option_name; ?>" /></li>
                                 
-
+                                
+                                    <?php } ?>
                             </ul>
                             <hr>
                             <?php } ?>

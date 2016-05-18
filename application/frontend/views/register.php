@@ -18,33 +18,93 @@
                             <!-- <form role="form" action="" method="post" class="registration-form"> -->
                             <?php echo form_open(); ?>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-first-name">First name</label>
-                                    <input type="text" name="first_name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+                                    
+                                    <?php 
+                                    echo form_label('First Name', 'form-first-name');
+                                    $form_input = array(
+                                        'type'      => 'text',
+                                        'name'      => 'first_name', 
+                                        'class'     => 'form-first-name form-control',
+                                        'id'        => 'form-first-name',
+                                        'placeholder'   => 'First Name'
+                                        );
+                                    echo form_input($form_input);
+                                    ?>
+                                    
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="last_name">Last name</label>
-                                    <input type="text" name="last_name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+                                    
+                                    <?php 
+                                    echo form_label('Last Name', 'form-last-name');
+                                    $form_input = array(
+                                        'type'      => 'text',
+                                        'name'      => 'last_name', 
+                                        'class'     => 'form-last-name form-control',
+                                        'id'        => 'form-last-name',
+                                        'placeholder'   => 'Last Name'
+                                        );
+                                    echo form_input($form_input);
+                                    ?>
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-email">Email</label>
-                                    <input type="text" name="email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                    
+                                    <?php 
+                                    echo form_label('Email', 'email');
+                                    $form_input = array(
+                                        'type'      => 'email`',
+                                        'name'      => 'email', 
+                                        'class'     => 'email form-control',
+                                        'id'        => 'email',
+                                        'placeholder'   => 'Email'
+                                        );
+                                    echo form_input($form_input);
+                                    ?>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-email">Password</label>
-                                    <input type="text" name="password" placeholder="Password" class="form-email form-control" id="form-email">
+                                    <?php 
+                                    echo form_label('Password', 'password');
+                                    $form_input = array(
+                                        'type'      => 'password`',
+                                        'name'      => 'password', 
+                                        'class'     => 'password form-control',
+                                        'id'        => 'password',
+                                        'placeholder'   => 'Password'
+                                        );
+                                    echo form_input($form_input);
+                                    ?>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-email">Confirm Password</label>
-                                    <input type="text" name="confirm_password" placeholder="Confirm Password" class="form-email form-control" id="form-email">
+                                    
+                                    <?php 
+                                    echo form_label('Confirm Password', 'password');
+                                    $form_input = array(
+                                        'type'      => 'password`',
+                                        'name'      => 'confirm_password', 
+                                        'class'     => 'confirm_password form-control',
+                                        'id'        => 'confirm_password',
+                                        'placeholder'   => 'Confirm Password'
+                                        );
+                                    echo form_input($form_input);
+                                    ?>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-about-yourself">About yourself</label>
-                                    <textarea name="about_yourself" placeholder="About yourself..." 
-                                                class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+                                    <label class="" for="form-about-yourself"></label>
+                                    <?php 
+                                    echo form_label('About yourself', 'About-yourself');
+                                    $form_text_area = array(
+                                        'name'      => 'about_yourself', 
+                                        'class'     => 'form-about-yourself form-control',
+                                        'id'        => 'form-about-yourself',
+                                        'placeholder'   => 'About Yourself', 
+                                        'rows'      => '2'
+                                        );
+                                    echo form_textarea($form_text_area);
+                                    ?>
+
                                 </div>
                                 <button type="submit" class="btn">Sign me up!</button>
                                 <a class="pull-right" href="<?php echo base_url(); ?>login">Already Have an Account</a>
