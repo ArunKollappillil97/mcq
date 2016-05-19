@@ -49,37 +49,41 @@
 		<i class="fa fa-bars"></i>
 	    </a>
 	    <div class="responsive_menu">
-		<ul class="main_menu">
-		    <li><a href="">Home</a></li>
-		    <li><a href="">Events</a>
-			<ul>
-			    <li><a href="events-grid.html">Events Grid</a></li>
-			    <li><a href="events-list.html">Events List</a></li>
-			    <li><a href="event-single.html">Event Details</a></li>
-			</ul>
-		    </li>
-		    <li><a href="index.html#">Courses</a>
-			<ul>
-			    <li><a href="courses.html">Course List</a></li>
-			    <li><a href="course-single.html">Course Single</a></li>
-			</ul>
-		    </li>
-		    <li><a href="index.html#">Blog Entries</a>
-			<ul>
-			    <li><a href="blog.html">Blog Grid</a></li>
-			    <li><a href="blog-single.html">Blog Single</a></li>
-			    <li><a href="blog-disqus.html">Blog Disqus</a></li>
-			</ul>
-		    </li>
-		    <li><a href="index.html">Pages</a>
-			<ul>
-			    <li><a href="archives.html">Archives</a></li>
-			    <li><a href="shortcodes.html">Shortcodes</a></li>
-			    <li><a href="gallery.html">Our Gallery</a></li>
-			</ul>
-		    </li>
-		    <li><a href="contact.html">Contact</a></li>
-		</ul> <!-- /.main_menu -->
+		<ul class="main-menu">
+                    <li class="active"><a href="<?php echo base_url(); ?>">Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>category/index">MCQ TEST</a>
+                        <ul class="sub-menu">
+				    <?php
+				    $category_list = $this->common_model->selectAll('tbl_category');
+
+				    foreach ($category_list as $value) {
+					$category_id = $value->id;
+					$subject_name = $this->common_model->selectAllWhere('tbl_subject', array('category_id' => $category_id));
+					?>
+
+    				    <li><a href="<?php echo base_url(); ?>category/sub_category"><?php echo $value->name; ?></a>
+					    <?php if (count($subject_name > 0)) { ?>
+						<ul class="sub-menu">
+						    <?php foreach ($subject_name as $value) { ?>
+	    					    <li><a href="<?php echo base_url(); ?>subject/<?php echo $value->id; ?>"><?php echo $value->name; ?></a></li>
+						    <?php } ?>
+
+
+						</ul>
+					    <?php } ?>
+
+
+    				    </li>
+
+				    <?php } ?>
+
+                                </ul>
+                            </li>
+                           
+
+                            <li><a href="<?php echo base_url(); ?>ask_question">Ask a Question</a></li>
+                            <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
+                        </ul> <!-- /.main-menu -->
 		<ul class="social_icons">
 		    <li><a href=""><i class="fa fa-facebook"></i></a></li>
 		    <li><a href=""><i class="fa fa-twitter"></i></a></li>
@@ -113,6 +117,7 @@
 					<li><a href="<?php echo base_url(); ?>login" style="margin-top:20px;"><span class="glyphicon glyphicon-lock"></span>Login</a></li>
 			    	<li><a href="<?php echo base_url(); ?>register" style="margin-top:20px;"><span class="glyphicon glyphicon-user"></span>Register</a></li>
 				<?php }elseif ($user_id==TRUE) { ?>
+					<li><a href="<?php echo base_url(); ?>my_account/index" style="margin-top:20px;"><span class="glyphicon glyphicon-user"></span>My Account</a></li>					
 					<li><a href="<?php echo base_url(); ?>logout" style="margin-top:20px;"><span class="glyphicon glyphicon-user"></span>Log Out</a></li>					
 				<?php } ?>
 
@@ -127,10 +132,10 @@
 	    <div class="nav-bar-main" role="navigation">
 		<div class="container">
 		    <nav class="main-navigation clearfix visible-md visible-lg" role="navigation">
-                        <ul class="main-menu sf-menu">
-                            <li class="active"><a href="<?php echo base_url(); ?>">Home</a></li>
-                            <li><a href="<?php echo base_url(); ?>category/index">MCQ TEST</a>
-                                <ul class="sub-menu">
+                <ul class="main-menu sf-menu">
+                    <li class="active"><a href="<?php echo base_url(); ?>">Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>category/index">MCQ TEST</a>
+                        <ul class="sub-menu">
 				    <?php
 				    $category_list = $this->common_model->selectAll('tbl_category');
 
@@ -207,11 +212,12 @@
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           <?php echo $error ;?>
         </div>
-       <?php } 
-       
-       if(validation_errors()){
-       	echo validation_errors();
-       }
-       ?>
+       <?php } ?> 
+
+       <?php if(validation_errors()){ ?>
+       	<!-- <div class="alert alert-danger" role="alert"> -->
+       	 <?php echo validation_errors(); ?>	
+       	<!-- </div> -->
+       	<?php } ?>
 </div>
 

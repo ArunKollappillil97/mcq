@@ -1,16 +1,18 @@
     <?php $this->load->view('common/header'); ?>
 <!-- /.site-header -->   
-    <div class="container">
-        <div>
-        <p>sdfsf</p>
-            <?php 
-            // if(validation_errors()){
-                // echo validation_errors();
-            print_r(validation_errors());
-            // }
-        ?>
-        </div>
-    </div>
+<style type="text/css">
+.field-error .control-label,
+.field-error .help-block,
+.field-error .form-control-feedback {
+    color: #ff0039;
+}
+
+.field-success .control-label,
+.field-success .help-block,
+.field-success .form-control-feedback {
+    color: #2780e3;
+}
+</style>
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -25,13 +27,14 @@
                                 <i class="fa fa-pencil"></i>
                             </div> -->
                         </div>
-                        <div class="form-bottom">
+                        <div class="form-bottom" id="registration_form">
                             <!-- <form role="form" action="" method="post" class="registration-form"> -->
                             <?php echo form_open(); ?>
                                 <div class="form-group">
                                     
                                     <?php 
                                     echo form_label('First Name', 'form-first-name');
+                                    echo form_error('first_name'); 
                                     $form_input = array(
                                         'type'      => 'text',
                                         'name'      => 'first_name', 
@@ -57,6 +60,22 @@
                                     echo form_input($form_input);
                                     ?>
                                 </div>
+
+                                <div class="form-group">
+                                    
+                                    <?php 
+                                    echo form_label('User Name', 'form-user-name');
+                                    $form_input = array(
+                                        'type'      => 'text',
+                                        'name'      => 'username', 
+                                        'class'     => 'form-last-name form-control',
+                                        'id'        => 'form-last-name',
+                                        'placeholder'   => 'User Name'
+                                        );
+                                    echo form_input($form_input);
+                                    ?>
+                                </div>
+
                                 <div class="form-group">
                                     
                                     <?php 
@@ -76,7 +95,7 @@
                                     <?php 
                                     echo form_label('Password', 'password');
                                     $form_input = array(
-                                        'type'      => 'password`',
+                                        'type'      => 'password',
                                         'name'      => 'password', 
                                         'class'     => 'password form-control',
                                         'id'        => 'password',
@@ -91,7 +110,7 @@
                                     <?php 
                                     echo form_label('Confirm Password', 'password');
                                     $form_input = array(
-                                        'type'      => 'password`',
+                                        'type'      => 'password',
                                         'name'      => 'confirm_password', 
                                         'class'     => 'confirm_password form-control',
                                         'id'        => 'confirm_password',
@@ -153,6 +172,70 @@
             </div>  /.col-md-4 -->
         </div>
     </div>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <script>
+$(document).ready(function() {
+       $('form').validate({
+        rules: {
+            first_name: {
+                minlength: 3,
+                maxlength: 15,
+                required: true
+            },
+            last_name: {
+                minlength: 3,
+                maxlength: 15,
+                required: true
+            },
+
+            username: {
+                minlength: 6,
+                maxlength: 35,
+                required: true
+            },
+
+            email: {
+                minlength: 10,
+                maxlength: 150,
+                required: true
+            },
+
+            password: {
+                minlength: 6,
+                maxlength: 15,
+                required: true
+            },
+
+            confirm_password: {
+                minlength: 6,
+                maxlength: 15,
+                required: true
+            }
+
+
+
+
+        },
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
+});
+</script>
 
 
 

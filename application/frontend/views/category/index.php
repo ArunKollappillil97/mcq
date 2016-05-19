@@ -50,7 +50,7 @@
                     <!-- ******************************************************************* -->
                     <div class="widget-main">
                         <div class="widget-main-title ">
-                            <h4 class="widget-title">BCS Preperation</h4>
+                            <a href="<?php echo base_url(); ?>category/"><h4 class="widget-title">BCS Preperation</h4></a>
                         </div>
                         <div class="widget-inner">
                             <div class="blog-categories">

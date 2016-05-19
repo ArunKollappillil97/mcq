@@ -67,56 +67,82 @@ class Auth extends CI_Controller {
 	public function register(){
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('first_name', 'required');
-		$this->form_validation->set_rules('last_name', 'required');
-		$this->form_validation->set_rules('email', 'required');
-		$this->form_validation->set_rules('password', 'required');
-		$this->form_validation->set_rules('confirm_password', 'required');
+		$id = 'sdfsdfsadfsddsf';
+		$this->form_validation->set_rules('first_name', 'First Name', 'required');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
+		$this->form_validation->set_rules('username', 'User Name', 'callback_check_exist');
+		$this->form_validation->set_rules('email', 'Email', 'callback_check_email_exist');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required');
 
 		if ($this->form_validation->run()==FALSE) {
-			// echo "<pre>";
-			// print_r($_POST);
-			// exit();
-			$msg = "Your Email is Already Registered";
-		    // $this->session->set_flashdata('success', $msg);
-		    
+			$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+			
 			$this->load->view('register');
 		}else{
-			// echo "<pre>";
-			// print_r($_POST);
-			// exit();
-
+			
 			$data = array();
 
-			$data['first_name'] = $this->input->post('first_name');
-			$data['last_name'] 	= $this->input->post('last_name');
-			$email = $data['email'] 		= $this->input->post('email');
-			$data['password'] 	= $this->input->post('password');	
-			$data['user_role'] 	= '2';
-			$data['date'] 		= date("Y-m-d")	;
+			$data['first_name'] 		= $this->input->post('first_name');
+			$data['last_name'] 			= $this->input->post('last_name');
+			$data['username'] 			= $this->input->post('username');
+			$email = $data['email'] 	= $this->input->post('email');
+			$data['password'] 			= md5($this->input->post('password'));	
+			$data['user_role'] 			= '5';
+			$data['date'] 				= date("Y-m-d")	;
 
-			$check_email_address = $this->auth_model->check_exist('users', array('email', $email));
-
-			// echo "<pre>";
-			// print_r($check_email_address);
-			// exit();
-			
+			$check_email_address = $this->auth_model->check_exist('users', array('email' => $email));
 
 			if ($check_email_address==TRUE) {
 				$msg = "Your Email is Already Registered";
-		        $this->session->set_flashdata('success', $msg);
-		        redirect('login');
+		        $this->session->set_flashdata('error', $msg);
+		        redirect('register');
 
-				redirect($_SERVER['HTTP_REFERER']);
+				// redirect($_SERVER['HTTP_REFERER']);
 			}else{
 				$this->db->insert('users', $data);
+
+				$msg = "You Are Successfully Registered";
+		        $this->session->set_flashdata('success', $msg);
+
 				redirect('login');
 			}
 
 		}
 
 		
+	}
+
+	public function check_exist($username){
+  		
+		
+		$check_exist_data = $this->auth_model->check_exist('users', array('username' => $username));
+
+		if ($username == $check_exist_data)
+		{
+			$this->form_validation->set_message('username_check', 'The %s field can not be the word '.$username.' ');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+
+	public function check_email_exist($email){
+  		
+		
+		$check_exist_data = $this->auth_model->check_exist('users', array('email' => $email));
+
+		if ($email == $check_exist_data)
+		{
+			$this->form_validation->set_message('email_check', 'The %s field can not be the word '.$email.' ');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 
 	public function logout(){

@@ -28,21 +28,15 @@ class Auth_model extends CI_Model{
     }
 
     public function check_exist($table_name, $check_field){
-        if(!empty ($email) && !empty($password)){
+        if(!empty ($table_name) && !empty($check_field)){
         $this->db->where($check_field);
-
-        $this->db->from($table_name);
-
-        $query = $this->db->get();
-            
-            if($query->num_rows() > 0){
-
-                 
-               return  $query->row();
-
-            }else{
-                return NULL;
-            }
+        $query = $this->db->get($table_name);
+        if ($query->num_rows() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
             
         }
 
