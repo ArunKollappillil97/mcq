@@ -1,6 +1,17 @@
     <?php $this->load->view('common/header'); ?>
 <!-- /.site-header -->   
     <div class="container">
+        <div>
+        <p>sdfsf</p>
+            <?php 
+            // if(validation_errors()){
+                // echo validation_errors();
+            print_r(validation_errors());
+            // }
+        ?>
+        </div>
+    </div>
+    <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <div class="col-md-12 widget-main">
