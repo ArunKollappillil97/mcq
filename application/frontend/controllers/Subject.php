@@ -19,6 +19,14 @@ class Subject extends CI_Controller {
     	$this->load->view('subject/view_details');
     }
 
+    public function subject_details($category_id, $subject_id){
+        $data = array();
+        $data['category_id'] = $category_id;
+        $data['subject_id']  = $subject_id;
+        
+        $this->load->view('subject/subject_details', $data);
+    }
+
     public function subject($id){
         $this->load->library('form_validation');
         // $this->load->view('subject/index');

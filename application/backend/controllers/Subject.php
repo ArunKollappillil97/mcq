@@ -35,6 +35,7 @@ class Subject extends CI_Controller {
 
 		$data['name'] = "";
 		$data['category_id'] = "";
+		$data['summery'] = "";
 		$data['category_list'] = $this->common_model->selectAll('tbl_category');
 		$data['serial'] = "";
 		$data['submit'] = "Save New Subject";
@@ -56,6 +57,7 @@ class Subject extends CI_Controller {
         	$datas = array();
 
         $datas['name'] = $this->input->post('name');
+        $datas['namesummery'] = $this->input->post('summery');
         $datas['serial'] = $this->input->post('serial');
         $datas['category_id'] = $this->input->post('category_id');
 
@@ -76,6 +78,7 @@ class Subject extends CI_Controller {
 		$content = $this->common_model->getInfo('tbl_subject', array('id' => $id));
 
 		$data['name'] = $content->name;
+		$data['summery'] = $content->summery;
 		$data['category_id'] = $content->category_id;
 		$data['category_list'] = $this->common_model->selectAll('tbl_category');
 		$data['serial'] = $content->serial;
@@ -98,6 +101,7 @@ class Subject extends CI_Controller {
         	$datas = array();
 
         $datas['name'] = $this->input->post('name');
+        $datas['summery'] = $this->input->post('summery');
         $datas['serial'] = $this->input->post('serial');
         $datas['category_id'] = $this->input->post('category_id');
 

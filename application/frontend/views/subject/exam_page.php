@@ -40,11 +40,12 @@
 
                             <ul>
                             <?php 
-                            $option_list = $this->common_model->selectAllWhere('tbl_option', array('question_id' => $exam_question['id']));
-
-                            foreach ($option_list as $key => $value) { ?>
-                                <li><input type="radio" <?php if($answered_option_id==$value->id) echo "checked"; ?> name="option" value="<?php echo $value->id; ?>"  /><?php echo $value->option_name; ?></li>
-                                <?php } ?>
+                            
+                            $option_list = $this->session->userdata('option_list');
+                            
+                            foreach ($option_list as $key => $value) { if($value['question_id']==$exam_question['id']){?>
+                                <li><input type="radio" <?php if($answered_option_id==$value['id']) echo "checked"; ?> name="option" value="<?php echo $value['id']; ?>"  /><?php echo $value['option_name']; ?></li>
+                                <?php }} ?>
                                 
 
                             </ul>
@@ -65,8 +66,7 @@
                             echo form_submit('next_question_submit', 'Next Question', array('class' => 'btn btn-primary')); 
                           }
 
-                            // echo form_submit('skipp_question', 'Skipp Question', array('class' => 'btn btn-primary')); 
-
+                           
                             echo form_submit('end_exam', 'End Exam', array('class' => 'btn btn-primary pull-right')); 
 
                            form_close(); 
@@ -143,7 +143,7 @@
                       var timeinterval = setInterval(updateClock, 1000);
                     }
 
-                    var deadline = new Date(Date.parse(new Date()) + 1 * <?php echo $hour; ?> * 60 * 60 * 1000);
+                    var deadline = new Date(Date.parse(new Date()) + 1 * <?php echo $hour; ?> * 30 * 60 * 1000);
                     initializeClock('clockdiv', deadline);
                 </script>
 

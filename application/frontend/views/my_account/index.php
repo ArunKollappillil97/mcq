@@ -6,40 +6,7 @@
         <div class="col-md-12">
 	<div class="widget-main">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper" class="min_height">
-            <ul class="sidebar-nav">
-                <li><a href="#" id="menu-toggle">
-                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                    Hide 
-                </a></li>
-                <li class="sidebar-brand">
-                    <a href="#" >
-                        My Account
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
+        <?php $this->load->view('exam/sidebar'); ?>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->

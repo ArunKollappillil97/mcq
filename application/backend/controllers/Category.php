@@ -36,6 +36,7 @@ class Category extends CI_Controller {
 		$data['name'] = "";
 		$data['category_image'] = "";
 		$data['serial'] = "";
+		$data['summery'] = "";
 		$data['submit'] = "Save New Category";
 
 		$this->load->library('form_validation');
@@ -55,6 +56,7 @@ class Category extends CI_Controller {
         	$datas = array();
 
         $datas['name'] = $this->input->post('name');
+        $datas['summery'] = $this->input->post('summery');
         $datas['serial'] = $this->input->post('serial');
 
         $this->db->insert('tbl_category', $datas);
@@ -75,6 +77,7 @@ class Category extends CI_Controller {
 		$data['name'] = $content->name;
 		$data['category_image'] = $content->category_image;
 		$data['serial'] = $content->serial;
+		$data['summery'] = $content->summery;
 		$data['submit'] = "Update Category";
 
 		$this->load->library('form_validation');
@@ -94,6 +97,7 @@ class Category extends CI_Controller {
         	$datas = array();
 
         $datas['name'] = $this->input->post('name');
+        $datas['summery'] = $this->input->post('summery');
         $datas['serial'] = $this->input->post('serial');
 
         $this->common_model->update('tbl_category', $datas, array('id' => $id));

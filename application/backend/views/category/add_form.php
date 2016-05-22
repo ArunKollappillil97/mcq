@@ -89,6 +89,20 @@
 	                    </div>
 					</div>
 
+					<div class="col-md-12">
+						<?php 
+							echo form_label('Category Summery', 'summery');
+							$form_text_area = array(
+                                'name'      => 'summery', 
+                                'value'      => $summery, 
+                                'class'     => 'form-about-yourself form-control',
+                                'id'        => 'summery',
+                                'placeholder'   => 'Add Summery', 
+                                'rows'      => '2'
+                                );
+                            echo form_textarea($form_text_area);
+						?>
+					</div>
 			
 					<div class="col-md-12">
 						<hr>
@@ -101,6 +115,7 @@
 						 echo form_submit($form_input); 
 						?>	
 					</div>
+
 									
 				
 			</div>

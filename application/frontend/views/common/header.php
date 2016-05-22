@@ -61,7 +61,7 @@
 					$subject_name = $this->common_model->selectAllWhere('tbl_subject', array('category_id' => $category_id));
 					?>
 
-    				    <li><a href="<?php echo base_url(); ?>category/sub_category"><?php echo $value->name; ?></a>
+    				    <li><a href="<?php echo base_url(); ?>category/main_category"><?php echo $value->name; ?></a>
 					    <?php if (count($subject_name > 0)) { ?>
 						<ul class="sub-menu">
 						    <?php foreach ($subject_name as $value) { ?>
@@ -144,11 +144,12 @@
 					$subject_name = $this->common_model->selectAllWhere('tbl_subject', array('category_id' => $category_id));
 					?>
 
-    				    <li><a href="<?php echo base_url(); ?>category/sub_category"><?php echo $value->name; ?></a>
+    				    <li><a href="<?php echo base_url(); ?>category/main_category/<?php echo $value->id; ?>"><?php echo $value->name; ?></a>
 					    <?php if (count($subject_name > 0)) { ?>
 						<ul class="sub-menu">
 						    <?php foreach ($subject_name as $value) { ?>
-	    					    <li><a href="<?php echo base_url(); ?>subject/<?php echo $value->id; ?>"><?php echo $value->name; ?></a></li>
+	    					    <!-- <li><a href="<?php //echo base_url(); ?>subject/<?php //echo $value->id; ?>"><?php //echo $value->name; ?></a></li> -->
+	    					    <li><a href="<?php echo base_url(); ?>subject/subject_details/<?php echo $category_id.'/'.$value->id; ?>"><?php echo $value->name; ?></a></li>
 						    <?php } ?>
 
 

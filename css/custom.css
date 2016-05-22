@@ -15,6 +15,18 @@
     padding-top: 10px;
 }
 
+.lb-sm {
+  font-size: 12px;
+}
+
+.lb-md {
+  font-size: 16px;
+}
+
+.lb-lg {
+  font-size: 20px;
+}
+
 
 /* main category Stylesheet */
 .exam_search_bar{

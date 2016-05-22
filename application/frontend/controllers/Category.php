@@ -13,8 +13,13 @@ class Category extends CI_Controller {
     	$this->load->view('category/index');
     }
 
-    public function sub_category(){
-    	$this->load->view('category/sub_category');
+    public function main_category($category_id){
+        $data = array();
+        $data['category_info'] = $this->common_model->getInfo('tbl_category', array('id' => $category_id));
+        $data['category_id'] = $category_id;
+
+        $data['subject_info'] = $this->common_model->selectAllWhere('tbl_subject', array('category_id' => $category_id));
+    	$this->load->view('category/main_category', $data);
     }
 
     public function subject(){

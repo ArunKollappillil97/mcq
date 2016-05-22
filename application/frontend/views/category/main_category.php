@@ -26,7 +26,7 @@
                             <h4 class="widget-title">Choose Your Exam</h4>
                         </div>
                         <div class="widget-inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas error, a porro nemo autem, fuga! Sint possimus incidunt commodi dicta facilis alias voluptas assumenda, nemo, necessitatibus dignissimos, recusandae quas minima.</p>
+                            <p><?php echo $category_info->summery; ?></p>
 
                             <hr>
 
@@ -55,65 +55,24 @@
                         <div class="widget-inner">
                             <div class="blog-categories">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="event-small-list clearfix">
-                                            <div class="event-small-details">
-                                                <h5 class="event-small-title"><i class="fa fa-book" aria-hidden="true"></i><a href="event-single.html">English Preperation</a></h5>
-                                                <p class="event-small-meta small-text">Cramton Auditorium 9:00 AM to 1:00 PM</p>
+
+                                    <?php 
+                                    foreach ($subject_info as $key => $value) { ?>
+                                        <div class="col-md-6">
+                                            <div class="event-small-list clearfix">
+                                                <div class="event-small-details">
+                                                    <h5 class="event-small-title"><i class="fa fa-book" aria-hidden="true"></i><a href="<?php echo base_url(); ?>subject/subject_details/<?php echo $category_id."/".$value->id; ?>"><?php echo $value->name; ?></a></h5>
+                                                    <p class="event-small-meta small-text">
+                                                        <?php $string = word_limiter($value->summery, 6); echo $string; ?>
+                                                    </p>
+                                                </div>
+                                                <hr/>
                                             </div>
+
                                         </div>
 
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="event-small-list clearfix">
-                                            <div class="event-small-details">
-                                                <h5 class="event-small-title"><i class="fa fa-book" aria-hidden="true"></i><a href="event-single.html">Mathmetics Preperation </a></h5>
-                                                <p class="event-small-meta small-text">Cramton Auditorium 9:00 AM to 1:00 PM</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="event-small-list clearfix">
-                                            <div class="event-small-details">
-                                                <h5 class="event-small-title"><i class="fa fa-book" aria-hidden="true"></i><a href="event-single.html">Bangla Preperation </a></h5>
-                                                <p class="event-small-meta small-text" align="justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. reprehenderit delectus ipsam!</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="event-small-list clearfix">
-                                            <div class="event-small-details">
-                                                <h5 class="event-small-title"><i class="fa fa-book" aria-hidden="true"></i><a href="event-single.html">General Knowledge Preperatin</a></h5>
-                                                <p class="event-small-meta small-text">Cramton Auditorium 9:00 AM to 1:00 PM</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="event-small-list clearfix">
-                                            <div class="event-small-details">
-                                                <h5 class="event-small-title"><i class="fa fa-book" aria-hidden="true"></i><a href="event-single.html">International Information </a></h5>
-                                                <p class="event-small-meta small-text">Cramton Auditorium 9:00 AM to 1:00 PM</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="event-small-list clearfix">
-                                            <div class="event-small-details">
-                                                <h5 class="event-small-title"><i class="fa fa-book" aria-hidden="true"></i><a href="event-single.html">Geography Information </a></h5>
-                                                <p class="event-small-meta small-text">Cramton Auditorium 9:00 AM to 1:00 PM</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    <?php } ?>
+                                   
                                 </div>
                             </div> <!-- /.blog-categories -->
                         </div>

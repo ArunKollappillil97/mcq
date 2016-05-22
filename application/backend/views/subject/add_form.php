@@ -62,7 +62,7 @@
 								<option value="">Select Category</option>
 
 								<?php foreach ($category_list as $value) { ?>
-									<option value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
+									<option <?php if($value->id==$category_id) echo "selected"; ?> value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
 								<?php } ?>
 								
 
@@ -86,7 +86,21 @@
 						    ?>
 	                    </div>
 					</div>
-
+					
+					<div class="col-md-12">
+						<?php 
+							echo form_label('Category Summery', 'summery');
+							$form_text_area = array(
+                                'name'      => 'summery', 
+                                'value'      => $summery, 
+                                'class'     => 'form-about-yourself form-control',
+                                'id'        => 'summery',
+                                'placeholder'   => 'Add Summery', 
+                                'rows'      => '2'
+                                );
+                            echo form_textarea($form_text_area);
+						?>
+					</div>
 			
 					<div class="col-md-12">
 						<hr>

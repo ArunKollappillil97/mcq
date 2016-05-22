@@ -3,6 +3,7 @@ class Exam_model extends CI_Model{
     
     public function check_exist_exam($user_id){
         $this->db->where('user_id', $user_id);
+        $this->db->where('exam_status !=', 0);
         $this->db->from('tbl_exam');
         $query_result= $this->db->get();
 
@@ -15,6 +16,22 @@ class Exam_model extends CI_Model{
         }
         
 
+    }
+
+    public function get_mcq_exam_question($number_of_question, $category_id, $subject_id){
+        $this->db->select('*');
+        $this->db->where('category_id', $category_id);
+        $this->db->where('subject_id', $subject_id);
+        $this->db->order_by('id', 'random');
+
+        $this->db->limit($number_of_question);
+
+        $this->db->from('tbl_question');
+
+        $query_result = $this->db->get();
+        $result = $query_result->result();
+
+        return $result;
     }
 
     public function select_question_set_by_subject($category_id, $subject_id){
@@ -32,9 +49,10 @@ class Exam_model extends CI_Model{
         return $result; 
     }
 
-    public function create_exam($category_id, $subject_id){
+    public function create_exam($number_of_question, $category_id, $subject_id){
         $this->db->insert('tbl_exam', array(
             'user_id' => $this->uid, 
+            'number_of_question' => $number_of_question, 
             'exam_status' => 1, 
             'exam_start_time' => date("h:i:sa"),
             'exam_end_time' => date("h:i:sa")

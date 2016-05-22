@@ -6,36 +6,7 @@
         <div class="col-md-12">
 	<div class="widget-main">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper" class="min_height">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#" id="menu-toggle">
-                        My Account
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
+        <?php $this->load->view('exam/sidebar'); ?>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
@@ -72,6 +43,7 @@
                     				<td>
                                     <!-- <a href="<?php echo base_url() ?>exam/take_exam/<?php echo $value->id; ?>" class="btn btn-primary">Take Exam</a> -->
 									<a href="<?php echo base_url() ?>exam/exam_process/<?php echo $value->id; ?>" class="btn btn-primary">Take Exam</a>
+                                    <a class="pull-right" href="<?php echo base_url(); ?>exam/delete/<?php echo $value->id; ?>"><i class="fa fa-times" aria-hidden="true"></i></a>
                     				</td>
                     			</tr>
 

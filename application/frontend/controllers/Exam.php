@@ -42,12 +42,17 @@ class Exam extends CI_Controller {
     	$this->load->view('subject/exam_page', $data);
     }
 
+    public function view_exam(){
+        $data['exam_list'] = $this->common_model->selectAllWhere('tbl_exam', array('user_id' => $this->uid));
+
+        $this->load->view('exam/index', $data); 
+    }
+
     /*
     | To purpose if user have already any exam unfinished in his/her 
     | database then redirect to his/her exam list dashboard. 
     | Data passing will two table tbl_exam and tbl_exam_question
     | If There are no any unfinished exam then to take exam method
-    | 
     **/
 
     public function create_exam($category_id=NULL, $subject_id=NULL){
@@ -55,11 +60,11 @@ class Exam extends CI_Controller {
     	$data = array();
     	$data['user_id'] = $this->uid;
         $data['exam_status'] = 1;
-        $data['number_of_question'] = $this->input->post('question_select');
+        $number_of_question = $data['number_of_question'] = $this->input->post('question_select');
         $data['date'] = date("Y-m-d");
         $data['exam_start_time'] = date("h:i:sa");
         $data['exam_end_time'] = date("h:i:sa");
-        $data['result'] = "Good";
+        $data['result'] = "";
         
         $check_exist_exam = $this->exam_model->check_exist_exam($this->uid);
 
@@ -70,13 +75,15 @@ class Exam extends CI_Controller {
             $this->load->view('exam/index', $data);            
         }else{
             
-            if ($category_id==NULL) $data['category_id']=5;
-            if($subject_id==NULL) $data['subject_id']=4;
+            if ($category_id==NULL) $data['category_id']=$category_id;
+            if($subject_id==NULL) $data['subject_id']=$subject_id;
 
             $this->db->insert('tbl_exam', $data);
             $exam_id = $this->db->insert_id();
-            // $insert_id = $this->exam_model->create_exam($category_id, $subject_id);
-            $get_mcq_exam_question = $this->common_model->selectAll('tbl_question');
+            // $insert_id = $this->exam_model->create_exam($number_of_question, $category_id, $subject_id);
+            // $get_mcq_exam_question = $this->common_model->selectAll('tbl_question');
+            $get_mcq_exam_question = $this->exam_model->get_mcq_exam_question($number_of_question, $category_id, $subject_id);
+
             
             $question_id = [];
             foreach ($get_mcq_exam_question as $value) {    
@@ -87,7 +94,8 @@ class Exam extends CI_Controller {
 
             $this->db->insert('tbl_exam_question', array('exam_id' => $exam_id, 'question_id' => $question_id, 'status' => 1));
             
-            redirect('exam/take_exam/'.$exam_id);
+            // redirect('exam/take_exam/'.$exam_id);
+            redirect('exam/exam_process/'.$exam_id);
         }
 
         
@@ -118,11 +126,13 @@ class Exam extends CI_Controller {
         
         if($exist_exam==NULL) {
 
-
+            $this->session->set_userdata('exam_id', $exam_id);
             $get_mcq_exam_question = $this->common_model->getInfo('tbl_exam_question', array('exam_id' => $exam_id));
+            
             $this->load->model('exam_model');
 
             $question_id = explode(",", $get_mcq_exam_question->question_id);
+         
 
             $question_number_list = $this->exam_model->process_exam($question_id);
             
@@ -584,14 +594,42 @@ exit();
     | View Exam Result Section Start From Here 
     **/
     public function veiw_exam_result(){
-        $exist_exam         = $this->session->userdata('question_number_listt');
 
+        $exist_exam         = $this->session->userdata('question_number_listt');
+        $exam_id            = $this->session->userdata('exam_id');
+                
+        if($exist_exam==NULL OR $exam_id ==NULL){
+            $this->session->set_flashdata('warning', "There are no Any Exam ");
+            redirect('exam/view_exam');
+        }
+
+        $result = 0;
+        foreach ($exist_exam as $key => $value) {
+            if($value['answered_option_id']==$value['correct_answer']){
+                $result += 1;
+                
+                
+            }
+        }
+       
+        $this->common_model->update('tbl_exam', array('exam_status' => 0, 'result' => $result), array('id' => $exam_id));
+
+        
         $data= array();
         $data['question_number_list']      = $exist_exam;// $question_number_list;
         
         $data['serial']             = '1';
         $data['number_of_question'] = count($exist_exam);
 
+        $this->session->unset_userdata('question_number_listt', 'option_list', 'exam_id');
+
         $this->load->view('exam/veiw_exam_result', $data);
+    }
+
+    public function delete($exam_id){
+        $this->common_model->delete('tbl_exam', array('id' => $exam_id));
+
+        $this->session->set_flashdata('warning', "There are no Any Exam ");
+        redirect('exam/view_exam');
     }
 }

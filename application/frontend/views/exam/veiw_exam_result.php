@@ -6,43 +6,14 @@
         <div class="col-md-12">
 	<div class="widget-main">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper" class="min_height">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#" id="menu-toggle">
-                        My Account
-                    </a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
+        <?php $this->load->view('exam/sidebar'); ?>
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
         <div id="page-content-wrapper" class="min_height">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <?php 
                         
                             $total_answered_question   = 0;
@@ -71,14 +42,22 @@
                             }
 
                          ?>
-                        <p> Total Number of Question : <?php echo $number_of_question; ?></p>
-                        <p> Total Answered Question : <?php echo $total_answered_question; ?></p>
-                        <p> Total Right Answer : <?php echo $total_correct_answer; ?></p>
-                        <p> Total Wrong Answer : <?php echo $total_wrong_answer; ?> </p> 
-                        <p> Total Missing Answer : <?php echo $total_missing_answer; ?> </p>
-                        <p> Finish The Exam withing Time : <?php //echo $total_missing_answer; ?> </p>
+                        <p> <span class="label label-default lb-md">Total Number of Question : <?php echo $number_of_question; ?> </span></p>
+                        <p> <span class="label label-primary lb-md"> Total Answered Question : <?php echo $total_answered_question; ?> </span></p>
+                        <p> <span class="label label-success lb-md"> Total Right Answer : <?php echo $total_correct_answer; ?></span></p>
+                        <p> <span class="label label-danger lb-md"> Total Wrong Answer : <?php echo $total_wrong_answer; ?> </span> </p> 
+                        <p> <span class="label label-warning lb-md"> Total Missing Answer : <?php echo $total_missing_answer; ?> </span> </p>
+                        <p> <span class="label label-success lb-md"> Finish The Exam withing Time : </span><?php //echo $total_missing_answer; ?> </span></p>
+                        <hr>
                     </div>
-                    <div class="col-lg-12">
+
+                    <div class="col-md-6 score_board">
+                        <span class="label label-primary lb-lg">Your Total Score is 20 out of 30</span>
+                    </div>
+
+                    
+
+                    <div class="col-md-6">
                         <h1>Exam List</h1>
                         
                     </div>
@@ -121,7 +100,7 @@
                                     <i class="fa fa-times fa-lg wrong" aria-hidden="true"></i>
                                     <?php } ?>
 
-                                    <input value="<?php echo $value->option_name; ?>" /></li>
+                                    <span><?php echo $value->option_name; ?></span>
                                 
                                 
                                     <?php } ?>
