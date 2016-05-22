@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="col-md-6 score_board">
-                        <span class="label label-primary lb-lg">Your Total Score is 20 out of 30</span>
+                        <span class="label label-primary lb-lg">Your Total Score is <?php echo $total_correct_answer; ?></span>
                     </div>
 
                     
