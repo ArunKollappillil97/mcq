@@ -120,6 +120,15 @@
     transition: all 0.5s ease;
 }
 
+.sidebar-nav li a#menu-toggle{
+    position: fixed;
+    background: #ccc;
+    color: #000;
+    left: 0;
+    padding-right: 10px;
+    /*margin-bottom: 20px;*/
+}
+
 #wrapper.toggled {
     padding-left: 250px;
 }
@@ -358,3 +367,4 @@
 .bg-success {
     background-color: #dff0d8;
 }
+
